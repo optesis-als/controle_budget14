@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+        <record id="menu_adds_rfq" model="website.menu">
+            <field name="name">Requests PO</field>
+            <field name="url">/add_vendor_rfq</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence" type="int">30</field>
+        </record>
+
+        <record id="seq_rfq_purchase_requests" model="ir.sequence">
+            <field name="name">RFQ Purchase Requests</field>
+            <field name="code">rfq.purchase.requests</field>
+            <field name="prefix">REQ/</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>
+
