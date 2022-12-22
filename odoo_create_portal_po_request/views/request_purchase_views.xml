@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+        <record id="prsit_portal_purchase_order_form_view" model="ir.ui.view">
+            <field name="name">Vendor Request Quotation</field>
+            <field name="model">rfq.purchase.requests</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_button_approve" type="object" states="draft" string="Approve" class="oe_highlight"/>
+<!--                        <button name="action_create_purchase_order" type="object" string="Create RFQ" class="oe_highlight" attrs="{'invisible': [('portal_purchase_id', '!=', 0), ('state', '!=', 'approve')]}"/>-->
+                            <button name="action_create_purchase_order" type="object" states="approve" string="Create RFQ" class="oe_highlight" />
+                        <button name="action_button_cancel" type="object" states="draft" string="Cancel" class="oe_secondary"/>
+                        <button name="action_button_reject" type="object" states="draft" string="Reject" class="oe_secondary"/>
+                        <button name="action_button_reset_draft" type="object" states="cancel,reject" string="Reset to Draft" class="oe_highlight"/>
+<!--                        <field name="state" widget="statusbar" statusbar_visible="draft,approve" readonly="1"/>-->
+                        <field name="state" widget="statusbar" statusbar_visible="draft,approve" readonly="1"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+<!--                            <field name="portal_purchase_id" invisible="1"/>-->
+<!--                            <button name="action_prsit_portal_purchase_order_link_po" type="object" class="oe_stat_button" icon="fa-shopping-cart" attrs="{'invisible':[('state', '=', 'draft')]}" string="Purchase Order"/>-->
+<!--                            <button name="action_prsit_portal_purchase_order_link_po" type="object" class="oe_stat_button" icon="fa-shopping-cart" attrs="{'invisible':[('portal_purchase_id', '=', 0)]}" string="Purchase Order"/>-->
+                            <button name="action_prsit_portal_purchase_order_link_po" type="object" class="oe_stat_button" icon="fa-shopping-cart"  string="Purchase Order" attrs="{'invisible': [('state', '!=', 'purchase')]}"/>
+                        </div>
+                        <div class="oe_title">
+                            <span class="o_form_label">Portal Vendor</span>
+                            <h1>
+                                <field name="priority" widget="priority" class="mr-3"/>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+<!--                                <field name="partner_id" widget="res_partner_many2one" context="{'res_partner_search_mode': 'supplier', 'show_vat': True}" placeholder="Name, TIN, Email, Ref." domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]"/>-->
+                                <field name="approver_id" />
+                                <field name="company_id" invisible="1"/>
+                                <field name="is_created_from_webrfq_prsit" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="date_order" attrs="{'readonly': [('state', '!=', ('draft'))]}"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Order Lines">
+                                <field name="order_line" attrs="{'readonly': [('state', 'in', ('approve', 'cancel'))]}">
+                                    <tree string="Portal Purchase Order Line" editable="bottom">
+                                        <field name="product_id" domain="[('purchase_ok', '=', True), '|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]"/>
+                                        <field name="name" widget="section_and_note_text"/>
+                                        <field name="currency_id" invisible="1"/>
+                                        <field name="product_qty"/>
+                                        <field name="price_unit"/>
+                                        <field name="price_subtotal" widget="monetary"/>
+                                    </tree>
+                                </field>
+                                <group>
+                                    <group class="oe_subtotal_footer oe_right">
+                                        <field name="currency_id" invisible="1"/>
+                                        <label for="amount_total"/>
+                                        <h3>
+                                            <field name="amount_total" nolabel="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                        </h3>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="prsit_portal_purchase_order_tree_view" model="ir.ui.view">
+            <field name="name">rfq.purchase.requests.tree</field>
+            <field name="model">rfq.purchase.requests</field>
+            <field name="arch" type="xml">
+                <tree decoration-bf="message_unread==True"
+                    decoration-muted="state=='cancel'"
+                    decoration-info="state in ('wait','confirmed')"
+                    string="Purchase Order"
+                    class="o_purchase_order"
+                    sample="1">
+                    <field name="priority" optional="show" widget="priority" nolabel="1"/>
+                    <field name="message_unread" invisible="1"/>
+                    <field name="partner_ref" optional="hide"/>
+                    <field name="name" string="Reference" readonly="1" decoration-bf="1"/>
+                    <field name="date_approve" widget="date" invisible="context.get('quotation_only', False)" optional="show"/>
+<!--                    <field name="partner_id"/>-->
+                    <field name="approver_id"/>
+                    <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}" optional="show"/>
+                    <field name="date_planned" invisible="context.get('quotation_only', False)" optional="show"/>
+                    <field name="user_id" widget="many2one_avatar_user" optional="show"/>
+                    <field name="date_order" optional="show"/>
+                    <field name="activity_ids" widget="list_activity" optional="show"/>
+                    <field name="origin" optional="show"/>
+                    <field name="amount_untaxed" sum="Total Untaxed amount" string="Untaxed" widget="monetary" optional="hide"/>
+                    <field name="amount_total" sum="Total amount" widget="monetary" optional="show" decoration-bf="1"/>
+                    <field name="currency_id" invisible="1"/>
+                    <!--<field name="state" invisible="1"/>-->
+<!--                    <field name="state" widget="badge" decoration-success="state == 'done'" decoration-info="state == 'approve'" decoration-danger="state == 'cancel'" optional="show"/>-->
+                    <field name="state" widget="badge" decoration-success="state == 'purchase'" decoration-info="state == 'approve'" decoration-danger="state == 'reject'" decoration-warning="state == 'cancel'" optional="show"/>
+                    <field name="invoice_status" widget="badge" decoration-success="invoice_status == 'invoiced'" decoration-info="invoice_status == 'to invoice'" optional="hide"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_prsit_portal_purchase_order" model="ir.actions.act_window">
+            <field name="name">Requests</field>
+            <field name="res_model">rfq.purchase.requests</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+        </record>
+
+        <menuitem id="prsit_vendor_main_menu" name="Requests" parent="purchase.menu_purchase_root" sequence="3"/>
+        <menuitem id="vendor_request_quotation_menu" name="Purchase Requests" parent="prsit_vendor_main_menu" action="action_prsit_portal_purchase_order"/>
+    </data>
+</odoo>
+

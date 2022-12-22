@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+        <template id="add_po_request_form">
+            <t t-call="website.layout">
+                <t t-set="no_footer" t-value="1"/>
+                <t t-set="additional_title">Add RFQ</t>
+                <form t-attf-action="/submit/vendor/rfq" method="post" class="prsit_parent">
+                    <div class="wrap">
+                        <div class="container py-2">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-row row justify-content-center mt-2 mb-3">
+                                        <div class="form-group col-8">
+                                            <p class="h3 text-center">Purchase Quotation Request</p>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                    <div class="form-row row justify-content-center my-2">
+                                        <div t-attf-class="form-group col-4">
+<!--                                            <label class="col-form-label" for="name">Partner Name</label>-->
+                                            <label class="col-form-label" for="name">Approver</label>
+                                            <select name="approver_id" t-attf-class="form-control">
+                                                <!--<t t-foreach="partners" t-as="partner">
+                                                    <option t-att-value="partner.id"><span t-esc="partner.display_name"/></option>
+                                                </t>-->
+                                                <t t-foreach="approvers" t-as="approver">
+                                                    <option t-att-value="approver.id"><span t-esc="approver.display_name"/></option>
+                                                </t>
+                                            </select>
+                                        </div>
+                                        <div t-attf-class="form-group col-4">
+                                            <label class="col-form-label" for="name">Order Deadline</label>
+                                            <input type="date" name="date_order" t-attf-class="form-control" required="required"/>
+                                        </div>
+                                    </div>
+<!--                                    <input type="hidden" class="sequence" name="seq" t-att-value="1"/>-->
+                                    <input type="hidden" class="sequence" name="seq" value="2"/>
+                                    <div class="form-row row justify-content-center mt-3">
+                                        <div class="form-group col-8">
+                                            <table class="table table-bordered prsit_table">
+                                                <tr class="bg-primary">
+                                                    <th width="40%">Product</th>
+                                                    <th width="40%">Description</th>
+                                                    <th width="20%">Quantity</th>
+                                                    <th></th>
+                                                </tr>
+                                                <tr class="prsit_tr o_hidden">
+                                                    <td>
+                                                        <select name="product_id_0" t-attf-class="form-control prsit_product_select">
+                                                            <option value="" >Select Product</option>
+                                                            <t t-foreach="products" t-as="product">
+                                                                <option t-att-value="product.id" t-att-desc="product.display_name"><span t-esc="product.display_name"/></option>
+                                                            </t>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <textarea type="text" name="description_0" t-att-value="description" t-attf-class="form-control prsit_product_desc"/>
+                                                    </td>
+                                                    <td>
+                                                        <input type="number" name="quantity_0" t-attf-class="form-control prsit_product_qty"  value="1" min="1"/>
+                                                    </td>
+                                                    <td>
+                                                        <a href="#" aria-label="Remove from RFQ Line" title="Remove from RFQ" class="js_delete_product no-decoration"> 
+                                                            <small><i class="fa fa-trash-o"></i></small>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr class="prsit_tr">
+                                                    <td>
+                                                        <select name="product_id_1" t-attf-class="form-control prsit_product_select" required="required">
+                                                            <option value="" >Select Product</option>
+                                                            <t t-foreach="products" t-as="product">
+                                                                <option t-att-value="product.id" t-att-desc="product.display_name"><span t-esc="product.display_name"/></option>
+                                                            </t>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <textarea type="text" name="description_1" t-att-value="description" t-attf-class="form-control prsit_product_desc"/>
+                                                    </td>
+                                                    <td>
+                                                        <input type="number" name="quantity_1" t-attf-class="form-control prsit_product_qty"  value="1" min="1" required="required"/>
+                                                    </td>
+                                                    <td class="td-action">
+                                                        <a href="#" aria-label="Remove from RFQ Line" title="Remove from RFQ" class="js_delete_product no-decoration"> 
+                                                            <small><i class="fa fa-trash-o"></i></small>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="form-row row justify-content-center mt-3">
+                                        <div t-attf-class="form-group col-8">
+                                            <button type="button" id="addPoLine" class="btn btn-primary float-left mb32">
+                                                + Add a new line
+                                            </button>
+                                            <button type="submit" class="btn btn-primary float-right mb32">
+                                                Submit
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </t>
+        </template>
+    </data>
+</odoo>
