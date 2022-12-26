@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+        <template id="assets_backend" inherit_id="web.assets_frontend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/odoo_create_portal_po_request/static/src/js/add_po_line.js" />
+                <script type="text/javascript" src="/odoo_create_portal_po_request/static/src/js/edit_po_line.js" />
+
+            </xpath>
+        </template>
+    </data>
+</odoo>

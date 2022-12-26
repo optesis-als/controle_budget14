@@ -22,5 +22,4 @@ class PurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
     
     account_id = fields.Many2one('account.account', string='Compte',
-        required=True, domain=[('deprecated', '=', False)],
         help="The income or expense account related to the selected product.")

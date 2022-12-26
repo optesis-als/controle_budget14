@@ -12,9 +12,7 @@ class PurchaseOrder(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin', 'portal.mixin']
     _order = 'priority desc, id desc'
 
-    account_id = fields.Many2one('account.account', string='Compte',
-        required=True, domain=[('deprecated', '=', False)],
-        help="The income or expense account related to the selected product.")
+    
 
     @api.model
     def create(self, vals):

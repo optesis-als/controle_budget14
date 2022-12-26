@@ -2,11 +2,11 @@
 
 <odoo>
     <data>
-        <template id="add_po_request_form">
+        <template id="edit_po_request_form">
             <t t-call="website.layout">
                 <t t-set="no_footer" t-value="1"/>
-                <t t-set="additional_title">Add RFQ</t>
-                <form t-attf-action="/submit/vendor/rfq" method="post" class="prsit_parent">
+                <t t-set="additional_title">Edit RFQ</t>
+                <form t-attf-action="/submit/vendor/rfq" method="post" class="edit_po_requests_form">
                     <div class="wrap">
                         <div class="container py-2">
                             <div class="row">
@@ -17,26 +17,26 @@
                                         </div>
                                     </div>
                                     <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                    <input type="hidden" name="rfq_purchase_requests_id" t-att-value="rfq_purchase.id" id="rfq_purchase_id"/>
                                     <div class="form-row row justify-content-center my-2">
                                         <div t-attf-class="form-group col-4">
 <!--                                            <label class="col-form-label" for="name">Partner Name</label>-->
                                             <label class="col-form-label" for="name">Approver</label>
                                             <select name="approver_id" t-attf-class="form-control">
                                                 <!--<t t-foreach="partners" t-as="partner">
-                                                    <option t-att-value="partner.id"><span t-esc="partner.display_name"/></option>
+                                                    <option t-att-value="partner.id" t-att-selected="rfq_purchase.partner_id.id==partner.id"><span t-esc="partner.display_name"/></option>
                                                 </t>-->
                                                 <t t-foreach="approvers" t-as="approver">
-                                                    <option t-att-value="approver.id"><span t-esc="approver.display_name"/></option>
+                                                    <option t-att-value="approver.id" t-att-selected="rfq_purchase.approver_id.id==approver.id"><span t-esc="approver.display_name"/></option>
                                                 </t>
                                             </select>
                                         </div>
                                         <div t-attf-class="form-group col-4">
                                             <label class="col-form-label" for="name">Order Deadline</label>
-                                            <input type="date" name="date_order" t-attf-class="form-control" required="required"/>
+                                            <input type="date" name="date_order" t-attf-class="form-control" t-att-value="rfq_purchase.date_order"/>
                                         </div>
                                     </div>
-<!--                                    <input type="hidden" class="sequence" name="seq" t-att-value="1"/>-->
-                                    <input type="hidden" class="sequence" name="seq" value="2"/>
+                                    <input type="hidden" class="sequence" name="seq" value="0"/> <!--t-att-value="len(rfq_purchase.order_line)"-->
                                     <div class="form-row row justify-content-center mt-3">
                                         <div class="form-group col-8">
                                             <table class="table table-bordered prsit_table">
@@ -44,7 +44,6 @@
                                                     <th width="40%">Product</th>
                                                     <th width="40%">Description</th>
                                                     <th width="20%">Quantity</th>
-                                                    <!--<th width="20%">Compte</th>-->
                                                     <th></th>
                                                 </tr>
                                                 <tr class="prsit_tr o_hidden">
@@ -62,35 +61,29 @@
                                                     <td>
                                                         <input type="number" name="quantity_0" t-attf-class="form-control prsit_product_qty"  value="1" min="1"/>
                                                     </td>
-                                                    <!--<td>
-                                                        <input type="Text" name="account_id" t-attf-class="form-control" />
-                                                          <t t-foreach="account_id" t-as="approver">
-                                                    <option t-att-value="approver"><span t-esc="approver.code"/></option>
-                                                </t>
-                                                    </td>-->
                                                     <td>
-                                                        <a href="#" aria-label="Remove from RFQ Line" title="Remove from RFQ" class="js_delete_product no-decoration"> 
+                                                        <a href="#" aria-label="Remove from RFQ Line" title="Remove from RFQ" class="js_delete_product no-decoration">
                                                             <small><i class="fa fa-trash-o"></i></small>
                                                         </a>
                                                     </td>
                                                 </tr>
-                                                <tr class="prsit_tr">
+                                                <tr class="prsit_tr" t-foreach="rfq_purchase.order_line" t-as="line">
                                                     <td>
-                                                        <select name="product_id_1" t-attf-class="form-control prsit_product_select" required="required">
+                                                        <select t-attf-name="product_id_#{line.id}" t-attf-class="form-control prsit_product_select" required="required">
                                                             <option value="" >Select Product</option>
                                                             <t t-foreach="products" t-as="product">
-                                                                <option t-att-value="product.id" t-att-desc="product.display_name"><span t-esc="product.display_name"/></option>
+                                                                <option t-att-value="product.id" t-att-desc="product.display_name" t-att-selected="line.product_id.id == product.id"><span t-esc="product.display_name"/></option>
                                                             </t>
                                                         </select>
                                                     </td>
                                                     <td>
-                                                        <textarea type="text" name="description_1" t-att-value="description" t-attf-class="form-control prsit_product_desc"/>
+                                                        <textarea type="text" t-attf-name="description_#{line.id}" t-attf-class="form-control prsit_product_desc"><t t-esc="line.name"/></textarea>
                                                     </td>
                                                     <td>
-                                                        <input type="number" name="quantity_1" t-attf-class="form-control prsit_product_qty"  value="1" min="1" required="required"/>
+                                                        <input type="number" t-attf-name="quantity_#{line.id}" t-attf-class="form-control prsit_product_qty"  t-att-value="line.product_qty" min="1" required="required"/>
                                                     </td>
                                                     <td class="td-action">
-                                                        <a href="#" aria-label="Remove from RFQ Line" title="Remove from RFQ" class="js_delete_product no-decoration"> 
+                                                        <a href="#" aria-label="Remove from RFQ Line" title="Remove from RFQ" class="js_delete_product no-decoration">
                                                             <small><i class="fa fa-trash-o"></i></small>
                                                         </a>
                                                     </td>
@@ -117,3 +110,4 @@
         </template>
     </data>
 </odoo>
+
