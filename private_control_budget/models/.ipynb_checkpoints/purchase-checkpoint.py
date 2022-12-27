@@ -32,7 +32,7 @@ class PurchaseOrder(models.Model):
         ('finance_approval', 'Waiting Finance Approval'),
         ('director_approval', 'Waiting Director Approval'),
         ('refuse', 'Refuse')],
-        string='Status',
+        string='Status',ondelete={'xlsx': 'set default'}
     )
     po_refuse_user_id = fields.Many2one(
         'res.users',
@@ -230,6 +230,7 @@ class PurchaseOrder(models.Model):
     def _get_lines(self):
         temoin = []
         self.crossovered_budget_line = []
+        self.order_line = []
         
         for line in self.order_line:
             budgets = self.env['crossovered.budget.lines'].search([('analytic_account_id','=',line.account_analytic_id.id),('general_budget_id.account_ids','=',line.account_id.ids),('date_from', '<', self.date_order),('date_to', '>', self.date_order)])
@@ -374,8 +375,7 @@ class PurchaseOrder(models.Model):
 class PurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
 
-    account_id = fields.Many2one('account.account', string='Compte',
-        required=True, domain=[('deprecated', '=', False)],
+    account_id = fields.Many2one('account.account', string='Compte',domain=[('deprecated', '=', False)],
         help="The income or expense account related to the selected product.")
 
     available =  fields.Float(string='Montant budget restant',compute="_get_available", digits=0 , default="0")

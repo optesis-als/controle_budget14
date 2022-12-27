@@ -375,8 +375,7 @@ class PurchaseOrder(models.Model):
 class PurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
 
-    account_id = fields.Many2one('account.account', string='Compte',
-        required=True, domain=[('deprecated', '=', False)],
+    account_id = fields.Many2one('account.account', string='Compte',domain=[('deprecated', '=', False)],
         help="The income or expense account related to the selected product.")
 
     available =  fields.Float(string='Montant budget restant',compute="_get_available", digits=0 , default="0")
