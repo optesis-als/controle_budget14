@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+         <record model="ir.module.category" id="base.module_category_human_resources_contracts">
+            <field name="description">Helps you manage your contracts.</field>
+            <field name="sequence">10</field>
+        </record>
+
+        
+        <record id="optesis_hr_contract.group_hr_contract_manager" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="category_id" ref="base.module_category_human_resources_contracts"/>
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        </record>
+
+        <record id="base.default_user" model="res.users">
+            <field name="groups_id" eval="[(4,ref('optesis_hr_contract.group_hr_contract_manager'))]"/>
+        </record>
+    </data>
+</odoo>

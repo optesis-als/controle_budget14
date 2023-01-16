@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="hr_contract_conge_form_inherit" model="ir.ui.view">
+            <field name="name">hr.contract.view.conge.form.inherit</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="optesis_hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+               <xpath expr="//page[@name='information']" position="after">
+                <page string="Congés" invisible="1">
+                  <group string="Initialisation">
+                    <group>
+                      <field name="cumul_jour"/>
+                    </group>
+                    <group>
+                      <field name="cumul_conges"/>
+                    </group>
+                  </group>
+                  <group string="Nombre de jours aquis et nombre de jours pris">
+                    <group>
+                      <field name="nbj_aquis" readonly="True"/>
+                    </group>
+                    <group>
+                      <field name="nbj_sup" readonly="True"/>
+                    </group>
+                    <group>
+                      <label for="nbj_pris" string="Nombre jours pris" readonly="True"/>
+                      <div>
+                        <field name="nbj_pris" class="oe_inline" readonly="True"/> Jours
+                      </div>
+                    </group>
+                  </group>
+                  <group string="Calcul allocation congés">
+                    <group>
+                      <field name="last_date"/>
+                    </group>
+                    <group>
+                    </group>
+                  </group>
+                  <group>
+                    <group>
+                      <label for="nb_days"/>
+                      <div><field name="nb_days" class="oe_inline"/> Jours </div>
+                    </group>
+                  </group>
+              </page>
+            </xpath>
+            
+             <xpath expr="//page[@name='other']/group/group" position="after">
+                  <group name="declaration_mouv" string="Déclaration de mouvement du travailleur">
+                                 
+                                <field name="motif_entree"/>
+                                <field name="motif"/>
+                                <field name="date_entree"/>
+                                 <field name="nom_employee"/>
+                                    
+                 </group>
+            <xpath expr="//page[@name='other']/group/group" position="after">
+                  <group name="declaration_mouv" string="Contrat de Travail">
+                                 
+                                <field name="dateAnciennete"/>
+                                <field name="periode_essai"/>
+                                <field name="duree"  attrs="{'invisible':[('periode_essai','!=','avec')]}"/>
+                                <field name="statut"/>
+                                    
+                 </group>
+                
+            </xpath>
+             
+            </xpath>
+
+            <xpath expr="//form/sheet/group/group/field[1]" position="before">
+              <field name="typeContract" required="1"/>
+           
+                
+                
+            </xpath>
+           
+
+          </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_contract_form_inherit_bis2">
+            <field name="name">hr.contract.form.inherit.bis2</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="optesis_hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='information']/group/group" position="replace">
+                        <group name="categorie_convention" string="Rémunération">
+                                 
+                                <field name="convention_id"/>
+                                <field name="wage"/>
+                                <field name="sursalaire"/>
+                                 <field name="prime"/>
+                                    
+
+                       </group>
+                 
+                  
+                </xpath>
+            </field>
+            
+       
+        </record>
+
+       
+        
+    </data>
+</odoo>

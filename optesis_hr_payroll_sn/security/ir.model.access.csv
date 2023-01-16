@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_payroll_chart_template,payroll.chart.template,model_payroll_chart_template,optesis_hr_payroll.group_hr_payroll_user,1,0,0,0
+
+access_payroll_chart_template_manager,payroll.chart.template,model_payroll_chart_template,optesis_hr_payroll.group_hr_payroll_manager,1,1,1,1
+
+access_payroll_chart_template_rh,payroll.chart.template,model_payroll_chart_template,optesis_hr_payroll.group_hr_payroll_directeur_rh,1,1,1,1
+
+access_payroll_chart_template_compta,payroll.chart.template,model_payroll_chart_template,optesis_hr_payroll.group_hr_payroll_res_comptable,1,1,1,1

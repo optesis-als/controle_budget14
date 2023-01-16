@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+      <data>
+        <record id="hr_employee_form_inherit" model="ir.ui.view">
+            <field name="name">hr.employee.form.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="priority">30</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+
+            <!--
+              <xpath expr="//notebook/page[@name='personal_information']/group/group/field[@name='identification_id']" position="replace">
+                <field name="matricule_cnss" />
+                <field name="ipres"/>
+                <field name="mutuelle"/>
+                <field name="identification_id"/>
+              </xpath>
+              -->
+                
+              <xpath expr="//notebook/page[@name='personal_information']" position="replace">
+                   <page name="personal_information" string="informations personnelles" groups="hr.group_hr_user">
+                                <group>
+                                    <group string="Nationalité et Autre Information">
+                                        <field name="country_id" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
+                                         <field name="matricule_cnss" />
+                                        <field name="ipres"/>
+                                        <field name="mutuelle"/>
+                                        <field name="identification_id"/>
+                                        <field name="passport_id" groups="hr.group_hr_user"/>
+                                        <field name="delivre_a"/>
+                                        <field name="par"/>
+                                        <field name="le" string="Le"/>
+                                        <field name="bank_account_id" context="{'default_partner_id': address_home_id}"/>
+                                        <field name="num_chezemployeur" string="Numéro chez l'employeur"/>
+                                    </group>
+                                    <group string="Information de contact">
+                                        <field name="address_home_id" string="Contact" context="{                                  'show_address': 1,  'default_type': 'private', 'form_view_ref': 'base.res_partner_view_form_private'}" options="{&quot;always_reload&quot;: True, &quot;highlight_first_line&quot;: True}"/>
+                                        <field name="adresse"/>
+                                         <field name="private_email" string="Email" invisible="1"/>
+                                        <field name="phone" class="o_force_ltr" groups="hr.group_hr_user" string="Phone" readonly="True" invisible="1"/>
+                                        <field name="is_address_home_a_company" invisible="1"/>
+                                        <div class="text-warning" groups="hr.group_hr_user" attrs="{'invisible': [('is_address_home_a_company','=', False)]}">
+                                            Use here the home address of the employee.
+                                            This private address is used in the expense report reimbursement document.
+                                            It should be different from the work address.
+                                        </div>
+                                        <field name="emergency_contact"/>
+                                        <field name="emergency_phone"/>
+                                        <field name="km_home_work" groups="hr.group_hr_user" string="Km maison-travail"/>
+                                    </group>
+                                    <group string="Status">
+                                        <field name="gender"/>
+                                        <field name="marital"/>
+                                        <field name="spouse_complete_name" attrs="{'invisible': [('marital', 'not in', ['married', 'cohabitant'])]}" groups="hr.group_hr_user"/>
+                                        <field name="spouse_birthdate" attrs="{'invisible': [('marital', 'not in', ['married', 'cohabitant'])]}" groups="hr.group_hr_user"/>
+                                        <field name="children"/>
+                                    </group>
+                                    <group string="Naissance">
+                                        <field name="birthday"/>
+                                        <field name="place_of_birth" groups="hr.group_hr_user"/>
+                                        <field name="country_of_birth" groups="hr.group_hr_user"/>
+                                        <field name="p_pere"/>
+                                        <field name="p_mere"/>
+                                        <field name="group_ethique"/>
+                                    </group>
+                                    <group string="Permis de travail" name="work_permit">
+                                        <field name="visa_no"/>
+                                        <field name="permit_no"/>
+                                        <field name="visa_expire"/>
+                                        <field name="date_entree_senegal"/>
+                                    </group>
+                                    <group string="Education">
+                                        <field name="certificate"/>
+                                        <field name="study_field"/>
+                                        <field name="study_school"/>
+                                    </group>
+                                </group>
+                                <group>
+                                   <!-- <field name="google_drive_link" widget="url"/>-->
+                                </group>
+                                <group>
+                                    <field name="additional_note"/>
+                                </group>
+                            </page>
+              </xpath>
+
+                
+                
+              <!--  
+              <xpath expr="//notebook/page[@name='personal_information']/group/group/field[@name='bank_account_id']" position="after">
+                <field name="num_chezemployeur" string="Numéro chez l'employeur"/>
+              </xpath>
+              -->
+              
+              <xpath expr="//notebook/page[@name='personal_information']/group/group/field[@name='country_id']" position="attributes">
+                  <attribute name="required">True</attribute>
+              </xpath>
+
+            </field>
+        </record>
+
+        <record id="hr_employee_form_inherit_bis" model="ir.ui.view">
+          <field name="name">hr.employee.form.inherit.bis</field>
+          <field name="model">hr.employee</field>
+          <field name="priority">30</field>
+          <field name="inherit_id" ref="hr.view_employee_form"/>
+          <field name="arch" type="xml">
+            <xpath expr="//notebook[last()]" position="inside">
+              <page string="Famille" name="famille">
+                <group colspan="2" col="2">
+                  <group>
+                    <field name="ir"/>
+                  </group>
+                  <group>
+                    <field name="trimf"/>
+                  </group>
+                </group>
+                <group>
+                  <field name="relation_ids">
+                    <tree editable="bottom">
+                      <field name="type"/>
+                      <field name="nom"/>
+                      <field name="prenom"/>
+                      <field name="birth" attrs="{'required':[('type','==','enfant')]}"/>
+                      <field name="date_mariage" attrs="{'required':[('type','==','conjoint')]}"/>
+                      <field name="salari"/>
+                    </tree>
+                  </field>
+                </group>
+              </page>
+            </xpath>
+          </field>
+        </record>
+          
+    <!-- 
+     <record model="ir.ui.view" id="view_employee_form_inherit_bis1">
+            <field name="name">hr.employee.form.inherit.bis1</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <field name="country_of_birth" position="after">
+                    <field name="p_pere"/>
+                    <field name="p_mere"/>
+                     <field name="group_ethique"/>
+
+                    	
+                </field>
+                  <field name="passport_id" position="after">
+                    <field name="delivre_a"/>
+                    <field name="par"/>
+                    <field name="le" string="Le"/>
+                    	
+                </field>
+            </field>
+        </record>
+     -->
+  </data>
+</odoo>

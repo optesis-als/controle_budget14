@@ -1,0 +1,1462 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <template id="contrat_dmt">
+      <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+
+          <div class="page" style="margin-top:-5px;padding-top:-5px;">
+            <t t-set="nb_epouse" t-value="0"/>
+             <t t-set="nb_enfant" t-value="0"/>
+
+            <style>
+              p {
+                font-family: "Times New Roman", Times, serif;
+              }
+              .border_2px {
+                border: 2px solid;
+                width: 100%;
+              }
+              .border_1px {
+                border: 2px solid;
+              }
+              .table_configuration {
+                width: 100%;
+                border-collapse: collapse;
+              }
+              .border_small_paragraph:after {
+                content: "";
+                /* This is necessary for the pseudo element to work. */
+                display: block;
+                /* This will put the pseudo element on its own line. */
+                margin: 0 auto;
+                /* This will center the border. */
+                width: 15%;
+                /* Change this to whatever width you want. */
+                padding-top: -10px;
+                /* This creates some space between the element and the border. */
+                border-bottom: 1px solid black;
+                /* This creates the border. Replace black with whatever color you want. */
+              }
+            </style>
+            <div class="row border_2px" style="width:100%;padding-top:-10px;height:100%">
+              <div class="row">
+                <div class="col-12 text-center" style="padding-bottom:10px">
+                  <table style="border-bottom:2px solid;" class="table_configuration" height="250px">
+                    <tr>
+                      <td align="left" style="width:70%;padding-right:-10%">
+                        <p style="font-size:29px;margin-left:10%;font-weight:bold;margin-top:40px;">DECLARATION DE MOUVEMENT DU TRAVAILLEUR</p>
+                        <div style="overflow: hidden;">
+                          <p style="font-size:29px;border-bottom:1px                                                             solid grey;margin-top:20px;margin-left:10%;width:12%;font-weight:bold;float:left;margin-top:-5px">
+                            N°
+                          </p>
+                          <p style="font-size:24px;border-bottom:1px                                                             solid grey;margin-top:20px;margin-left:10%;width:12%;font-weight:bold;float:right;margin-right:40%;margin-top:-5px">
+                            du
+                          </p>
+                        </div>
+
+                      </td>
+                      <td rowspan="2" align="left" style="width:30%;padding-bottom:3%;">
+                        <p style="font-size:19px;margin-left:1%;;height:200px;border:1px solid;margin-top:-50px;padding-top:100px;padding-left:20px">
+                          Cachet et raison sociale
+                          <br/>
+                          <span style="font-size:24px">
+                            &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;de l'employeur</span>
+                        </p>
+
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style="width:70%">
+                        <p align="center" style="font-size:24px;margin-bottom:50px;font-weight:bold;margin-top:-30px">
+                          REFERENCES
+                        </p>
+                        <p style="font-size:19px;margin-left:10%;margin-top:-50px">
+                          Article 193 (Alinéas 2,3,4) du Code du travail (loi n° 61-34 du 15 juin 1961),
+                        </p>
+                        <p style="font-size:19px;margin-left:10%;margin-top:-10px">
+                          Arrêté ministériel n° 7301 du 17 mai 1963 déterminant les modalités des
+                        </p>
+                        <p style="font-size:19px;margin-left:10%;margin-top:-10px">
+                          déclarations de mouvements de travailleurs (J.O. 22 juin 1963, p.825) c
+                        </p>
+                      </td>
+
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <div clas="row" style="margin-top:-2%;width:100%;">
+                <div class="col-12">
+                  <table style="height:50px" class="table_configuration">
+                    <tr>
+                      <td align="left" style="width:50%;">
+                        <p style="font-size:22px;margin-left:10px;margin-top:15px;">
+                          N° d'immatriculation du travailleur au fichier central
+                          <br/>
+                          de la main-d'œuvre
+                        </p>
+                      </td>
+
+                      <td align="left" style="width:50%;">
+                        <p style="font-size:24px;margin-left:13%;margin-top:11px;height:30px;border-left:2px solid;border-bottom:2px solid;"/>
+                        <p style="font-size:29px;padding-left:14%;margin-top:-20px;">
+                          A&amp;nbsp; &amp;nbsp; &amp;nbsp; B&amp;nbsp; &amp;nbsp; &amp;nbsp; C&amp;nbsp; &amp;nbsp; &amp;nbsp; D&amp;nbsp; &amp;nbsp; &amp;nbsp; E&amp;nbsp; &amp;nbsp; &amp;nbsp; F
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12" style="border-top:2px solid;width:100%">
+                  <table style="" class="table_configuration">
+                    <tr>
+                      <td align="left" style="width:50%;">
+                        <p style="font-size:29px;margin-left:10%;font-weight:bold;margin-top:-5px;">OBJET DE LA PRESENTE DECLARATION</p>
+
+                      </td>
+                      <td align="left" style="width:40%;">
+                        <p style="font-size:19px;margin-left:1%;">(Rayer les mentions inutiles et encadrer la mention valable
+                          <br/>
+                          a completer eventuellement dans le blanc ci-dessous)</p>
+
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12" style="width:100%;padding-top:15px">
+                  <table style="" class="table_configuration">
+                    <tr>
+                      <td align="left" style="width:100%;">
+
+                        <span t-if="o.motif_entree == 'embauche'" style="font-size:19px;margin-left:1px;border-right:2px solid;border-top:2px solid;border-bottom:2px solid;width:70%">
+                          &amp;nbsp;
+                          <span t-field="o.motif_entree"/>
+                          &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;
+                        </span>
+                        <span t-if=" not o.motif_entree == 'embauche'" style="font-size:19px;margin-left:1px;width:70%">
+                          &amp;nbsp;
+                          <span>Embauche</span>
+                          &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;
+                        </span>
+
+                      </td>
+
+                    </tr>
+
+                    <tr>
+
+                      <td t-if="o.motif == 'licenciement'" class="bordure" align="left" style="">
+
+                        <span t-field="o.motif" style="font-size:19px;margin-left:10px;width:70%;border-right:2px solid;border-top:2px solid;border-bottom:2px solid;width:70%"/>
+
+                      </td>
+
+                    </tr>
+
+                    <tr>
+                      <td t-if=" not o.motif == 'licenciement'" align="left" style="">
+
+                        <span t-if=" not o.motif == 'Licenciement'" style="font-size:19px;width:70%;">
+                          <span style="font-size:19px;margin-left:10px;width:70%;">Licenciement</span>
+
+                        </span>
+
+                      </td>
+
+                    </tr>
+                    <tr>
+
+                      <td t-if="o.motif == 'expirationnormal'" class="bordure" align="left" style="">
+
+                        <span t-field="o.motif" style="font-size:19px;margin-left:10px;border-right:2px solid;border-top:2px solid;border-bottom:2px solid;width:80%"/>
+
+                      </td>
+
+                    </tr>
+                    <tr>
+
+                      <td t-if=" not o.motif == 'expirationnormal'" class="bordure" align="left" style="">
+
+                        <span style="font-size:19px;margin-left:10px;width:70%;">
+                          Expiration normale du contrat
+                        </span>
+
+                      </td>
+
+                    </tr>
+
+                    <tr>
+
+                      <td t-if="o.motif == 'demissionmutation'" class="bordure" align="left" style="">
+
+                        <span t-field="o.motif" style="font-size:19px;margin-left:10px;width:70%;border-right:2px solid;border-top:2px solid;border-bottom:2px solid;width:70%"/>
+
+                      </td>
+
+                    </tr>
+                    <tr>
+
+                      <td t-if=" not o.motif == 'demissionmutation'" class="bordure" align="left" style="">
+
+                        <span style="font-size:19px;margin-left:10px;width:70%;">
+                          Démission-Mutation
+                        </span>
+
+                      </td>
+
+                    </tr>
+
+                  </table>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12" style="width:100%;padding-top:-10%;pading:10%">
+
+                  <table style="width:100%;border-collapse:collapse">
+                    <tr>
+                      <td style="width:30%">
+                        <p style="font-size:29px;width:30%;height:40px; solid;width:50%"/>
+                      </td>
+                      <td style="width:67%" align="center">
+                        <p class="text-center" style="font-size:29px;height:40px; solid;border-right:4px solid;border-bottom:4px solid;border-top:2px solid;margin-top:-10%;border-left:2px solid;width:67%;padding-left:10%">
+                          MODIFICATION
+
+                        </p>
+                      </td>
+
+                    </tr>
+                  </table>
+
+                </div>
+
+              </div>
+              <div class="row" style="margin-top:-40px">
+                <div class="col-12" style="width:100%;padding-top:15px">
+                  <table style="" class="table_configuration">
+
+                    <tr>
+
+                      <td t-if="o.motif_entree == 'changementcategorieprofessionnel'"  align="left" style="width:100%;">
+
+                        <span t-field="o.motif_entree" style="font-size:19px;margin-left:10px;border-right:2px solid;border-top:2px solid;border-bottom:2px solid;width:80%"/>
+
+                      </td>
+
+                    </tr>
+                    <tr>
+
+                      <td t-if=" not o.motif_entree == 'changementcategorieprofessionnel'" class="bordure" align="left" style="width:100%;">
+
+                        <span style="font-size:19px;margin-left:10px;width:70%;">
+                          Changement De Categorie Professionnelle
+                        </span>
+
+                      </td>
+
+                    </tr>
+
+                    <tr>
+
+                      <td t-if="o.motif_entree == 'changementcategoriefamille'"  align="left" style="width:100%;">
+
+                        <span t-field="o.motif_entree" style="font-size:19px;margin-left:10px;width:70%;border-right:2px solid;border-top:2px solid;border-bottom:2px solid;width:80%"/>
+
+                      </td>
+
+                    </tr>
+                    <tr>
+
+                      <td t-if=" not o.motif_entree == 'changementcategoriefamille'" class="bordure" align="left" style="width:100%;">
+
+                        <span style="font-size:19px;margin-left:10px;width:70%;">
+                          Changement De Categorie de Famille
+                        </span>
+
+                      </td>
+
+                    </tr>
+
+                    <tr>
+
+                      <td t-if="o.motif_entree == 'changementresidencehabituelle'" align="left" style="width:100%;">
+
+                        <span t-field="o.motif_entree" style="font-size:19px;margin-left:10px;border-right:2px solid;border-top:2px solid;border-bottom:2px solid;width:80%"/>
+
+                      </td>
+
+                    </tr>
+                    <tr>
+
+                      <td t-if=" not o.motif_entree == 'changementresidencehabituelle'" class="bordure" align="left" style="width:100%;">
+
+                        <span style="font-size:19px;margin-left:10px;width:70%;">
+                          Changement De Residence habituelle
+                        </span>
+
+                      </td>
+
+                    </tr>
+
+                  </table>
+                </div>
+              </div>
+              <div class="row" style="margin-top:-15px">
+                <div class="col-12" style="width:100%;padding-top:-10%;pading:10%">
+
+                  <table style="width:100%;border-collapse:collapse">
+                    <tr>
+                      <td style="width:30%">
+                        <p style="font-size:29px;width:30%;height:40px; solid;width:50%"/>
+                      </td>
+                      <td align="left" style="width:70%">
+                        <p style="font-size:19px;margin-left:110px;width:70%;margin-top:-11%">
+                          Si le travailleur n'a pas été immatricule, la mention<br/>
+                          "Immatriculation" devra être portée dans le blanc ci-dessus.
+
+                        </p>
+
+                      </td>
+
+                    </tr>
+                  </table>
+
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-12" style="width:100%;padding-top:15px">
+                  <p style="font-size:29px;margin-left:10px;font-weight:bold;margin-top:-30px;">CONCERNANT TRAVAILLEUR</p>
+                </div>
+              </div>
+
+              <div class="row" style="margin-top:-15px">
+                <div class="col-12" style="width:100%;padding-top:-10%;">
+
+                  <table style="width:100%;border-collapse:collapse">
+                    <tr>
+                      <td style="width:11%;padding-top:10px">
+                        <p style="font-size:19px;height:40px; solid;border-bottom:1px solid white;margin-left:10px">
+                          Nom Complet:
+
+                        </p>
+                      </td>
+                      <td style="width:74%">
+                        <p style="font-size:19px;border-bottom:1px solid grey;margin-top:-10px">
+                          <span t-field="o.employee_id.name"/>
+
+                        </p>
+                      </td>
+
+                      <td style="width:5%;padding-top:5px">
+                        <p style="font-size:19px; solid;margin-left:10px;border-bottom:1px solid white">
+                          Sexe:
+
+                        </p>
+                      </td>
+                      <td style="width:10%">
+                        <p style="font-size:19px;border-bottom:1px solid grey;margin-top:-10px">
+                          <span t-field="o.employee_id.gender"></span>
+
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+
+                </div>
+
+              </div>
+              <div class="row" style="margin-top:-15px">
+                <div class="col-12" style="width:100%;padding-top:-10%;">
+
+                  <table style="width:100%;border-collapse:collapse">
+                    <tr>
+                      <td style="width:8%;padding-top:10px">
+                        <p style="font-size:19px;height:40px; solid;border-bottom:1px solid white;margin-left:10px">
+                          Né(e) le:
+
+                        </p>
+                      </td>
+                      <td style="width:20%">
+                        <p style="font-size:19px;border-bottom:1px solid grey;margin-top:-10px">
+                          <span t-field="o.employee_id.birthday"></span>
+
+                        </p>
+                      </td>
+                      <td style="width:2%;padding-top:5px">
+                        <p style="font-size:19px;solid;border-bottom:1px solid white">
+                          à
+
+                        </p>
+                      </td>
+                      <td style="width:23%">
+                        <p style="font-size:19px; solid;border-bottom:1px solid grey;margin-top:-10px">
+                          <span t-field="o.employee_id.place_of_birth"></span>
+
+                        </p>
+                      </td>
+
+                      <td style="width:6%;padding-top:5px">
+                        <p style="font-size:19px; solid;margin-left:10px;border-bottom:1px solid white">
+                          pays:
+
+                        </p>
+                      </td>
+                      <td style="width:15%">
+                        <p style="font-size:19px;border-bottom:1px solid grey;margin-top:-10px">
+                          <span t-field="o.employee_id.country_of_birth"></span>
+
+                        </p>
+                      </td>
+                      <td style="width:10%;padding-top:5px">
+                        <p style="font-size:19px; solid;margin-left:10px;border-bottom:1px solid white">
+                          Nationalité:
+
+                        </p>
+                      </td>
+                      <td style="width:15%">
+                        <p style="font-size:19px;border-bottom:1px solid grey;margin-top:-10px">
+                          <span t-field="o.employee_id.country_id"></span>
+
+                        </p>
+                      </td>
+
+                    </tr>
+                  </table>
+
+                </div>
+                <div class="row" style="margin-top:-15px">
+                  <div class="col-12" style="width:100%;padding-top:-10%;">
+
+                    <table style="width:100%;border-collapse:collapse">
+                      <tr>
+                        <td style="width:12%;padding-top:10px">
+                          <p style="font-size:19px;height:40px; solid;border-bottom:1px solid white;margin-left:10px">
+                            Fils de (père):
+
+                          </p>
+                        </td>
+                        <td style="width:23%">
+                          <p style="font-size:19px;border-bottom:1px solid grey;margin-top:-10px">
+
+                            <span t-field="o.employee_id.p_pere"/>
+
+                          </p>
+                        </td>
+                        <td style="width:10%;padding-top:5px">
+                          <p style="font-size:19px;solid;border-bottom:1px solid white">
+                            et de (mère):
+                          </p>
+                        </td>
+                        <td style="width:25%">
+                          <p style="font-size:19px; solid;border-bottom:1px solid grey;margin-top:-10px">
+                            <span t-field="o.employee_id.p_mere"/>
+
+                          </p>
+                        </td>
+
+                        <td style="width:13%;padding-top:5px">
+                          <p style="font-size:19px; solid;margin-left:10px;border-bottom:1px solid white">
+                            Groupe ethique:
+
+                          </p>
+                        </td>
+                        <td style="width:17%">
+                          <p style="font-size:19px;border-bottom:1px solid grey;margin-top:-10px">
+                            <span t-field="o.employee_id.group_ethique"/>
+
+                          </p>
+                        </td>
+
+                      </tr>
+                    </table>
+
+                  </div>
+
+                </div>
+                <div class="row" style="margin-top:-15px">
+                  <div class="col-12" style="width:100%;padding-top:-10%;">
+
+                    <table style="width:100%;border-collapse:collapse">
+                      <tr>
+                        <td style="width:17%;padding-top:10px">
+                          <p style="font-size:19px;height:40px; solid;border-bottom:1px solid white;margin-left:10px">
+                            Adresse (trés précise):
+
+                          </p>
+                        </td>
+                        <td style="width:82%">
+                          <p style="font-size:19px;border-bottom:1px solid grey;margin-top:-10px">
+                            <span t-field="o.employee_id.adresse"></span>
+
+                          </p>
+                        </td>
+
+                      </tr>
+                    </table>
+
+                  </div>
+
+                </div>
+
+                <div class="row" style="margin-top:-15px">
+                  <div class="col-12" style="width:100%;padding-top:-10%;">
+
+                    <table style="width:100%;border-collapse:collapse">
+                      <tr>
+                        <td style="width:15%;padding-top:10px">
+                          <p style="font-size:19px;height:40px; solid;border-bottom:1px solid white;margin-left:10px">
+                            Passeport N°:
+
+                          </p>
+                        </td>
+                        <td style="width:32%">
+                          <p style="font-size:19px;border-bottom:1px solid grey;margin-top:-10px">
+                            <span t-field="o.employee_id.passport_id"></span>
+
+                          </p>
+                        </td>
+                        <td style="width:9%;padding-top:5px">
+                          <p style="font-size:19px;solid;border-bottom:1px solid white">
+                            Délivré à:
+
+                          </p>
+                        </td>
+                        <td style="width:26%">
+                          <p style="font-size:19px; solid;border-bottom:1px solid grey;margin-top:-2px">
+                            <span t-field="o.employee_id.delivre_a"></span>
+
+                          </p>
+                        </td>
+
+                        <td style="width:4%;padding-top:5px">
+                          <p style="font-size:19px; solid;margin-left:10px;border-bottom:1px solid white">
+                            Le:
+
+                          </p>
+                        </td>
+                        <td style="width:15%">
+                          <p style="font-size:19px;border-bottom:1px solid grey;margin-top:-10px">
+                            <span t-field="o.employee_id.le"></span>
+
+                          </p>
+                        </td>
+                      </tr>
+                    </table>
+
+                  </div>
+
+                </div>
+                <div class="row" style="margin-top:-15px">
+                  <div class="col-12" style="width:100%;padding-top:-10%;">
+
+                    <table style="width:100%;border-collapse:collapse">
+                      <tr>
+                        <td style="width:5%;padding-top:10px">
+                          <p style="font-size:19px;height:40px; solid;border-bottom:1px solid white;margin-left:10px">
+                            Par:
+
+                          </p>
+                        </td>
+                        <td style="width:95%">
+                          <p style="font-size:19px;border-bottom:1px solid grey;margin-top:-10px">
+                            <span t-field="o.employee_id.par"></span>
+
+                          </p>
+                        </td>
+
+                      </tr>
+                    </table>
+
+                  </div>
+
+                </div>
+
+                <div class="row" style="margin-top:-15px">
+                  <div class="col-12" style="width:100%;padding-top:-10%;">
+
+                    <table style="width:100%;border-collapse:collapse">
+                      <tr>
+                        <td style="width:30%;padding-top:10px">
+                          <p style="font-size:19px;height:40px; solid;border-bottom:1px solid white;margin-left:10px">
+                            N° d'immutriculation à la C.C.P.F.- A.T.
+
+                          </p>
+                        </td>
+                        <td style="width:21%">
+                          <p style="font-size:19px;border-bottom:1px solid grey;margin-top:-10px">
+                            //
+
+                          </p>
+                        </td>
+
+                        <td style="width:27%;padding-top:10px">
+                          <p style="font-size:19px;height:40px; solid;border-bottom:1px solid white;margin-left:10px">
+                            N° d'immatriculation à l'A.G.R.O.M.
+                          </p>
+                        </td>
+                        <td style="width:21%">
+                          <p style="font-size:19px;border-bottom:1px solid grey;margin-top:-10px">
+                           //
+
+                          </p>
+                        </td>
+
+                      </tr>
+
+                    </table>
+
+                  </div>
+
+                </div>
+
+                <t t-foreach="o.employee_id.relation_ids" t-as="epouse">
+
+                  <span t-if="epouse.type == 'conjoint'">
+                    <t t-set="nb_epouse" t-value="nb_epouse+1"/>
+                  </span>
+                 <span t-if="epouse.type == 'enfant'">
+                    <t t-set="nb_enfant" t-value="nb_enfant+1"/>
+                  </span>
+                </t>
+                <div class="row" style="margin-top:-15px">
+                  <div class="col-12" style="width:100%;padding-top:-10%;">
+
+                    <table style="width:100%;border-collapse:collapse">
+                      <tr>
+                        <td style="width:30%;padding-top:10px">
+                          <p style="font-size:19px;height:40px; solid;border-bottom:1px solid white;margin-left:10px">
+                            Situation de famille (marié, divorcé, veuf):
+
+                          </p>
+                        </td>
+                        <td style="width:70%">
+                          <p style="font-size:19px;border-bottom:1px solid grey;margin-top:-10px">
+                            <span t-field="o.employee_id.marital"/>
+                          </p>
+                        </td>
+
+                       
+
+                      </tr>
+
+                    </table>
+
+                  </div>
+
+                </div>
+
+                   <div class="row" style="margin-top:-25px">
+                  <div class="col-12" style="width:100%;padding-top:-10%;">
+
+                    <table style="width:100%;border-collapse:collapse">
+                      <tr>
+                        <td style="width:15%;padding-top:10px">
+                          <p style="font-size:19px;solid;border-bottom:1px solid white;margin-left:10px;margin-top:5px">
+                            Nombre d'épouses
+                          </p>
+                        </td>
+                        <td style="width:5%;padding-top:10px">
+                          <p style="font-size:19px;margin-top:5px">
+
+                            <span t-esc="nb_epouse"/>
+                          </p>
+                        </td>
+
+                        <td style="width:15%;padding-top:15px">
+                          <p style="font-size:19px; solid;border-bottom:1px solid white;margin-left:10px;margin-top:5px">
+                         Nom des épouses:
+                          </p>
+                        </td>
+                        <td style="width:65%;font-size:19px;padding-top:15px">
+
+                          <span t-foreach="o.employee_id.relation_ids" t-as="epouse" style="margin-top:-30px">
+
+                            <span t-if="epouse.type == 'conjoint'">
+                            <span t-field="epouse.prenom"/> <span t-field="epouse.nom"/>
+                            </span>
+                                  <span><![CDATA[&nbsp;]]></span>
+
+                          </span>
+
+                        </td>
+                      </tr>
+
+                    </table>
+
+                  </div>
+
+                </div>
+
+                <div class="row" style="margin-top:3px">
+                  <div class="col-12" style="width:100%;padding-top:-10%;">
+
+                    <table style="width:100%;border-collapse:collapse">
+                      <tr>
+                        <td style="width:100%;">
+                          <p style="font-size:19px;solid;border-bottom:1px solid grey;color:white"></p>
+                        </td>
+
+                      </tr>
+
+                    </table>
+
+                  </div>
+
+                </div>
+
+                  
+    
+
+                <div class="row" style="margin-top:-5px">
+                  <div class="col-12" style="width:100%;padding-top:-10%;">
+
+                    <table style="width:100%;border-collapse:collapse">
+                      <tr>
+                        <td style="width:21%;padding-top:10px">
+                          <p style="font-size:19px;solid;border-bottom:1px solid white;margin-left:10px;margin-top:5px">
+                            Nombre d'enfants à charge:
+                          </p>
+                        </td>
+                        <td style="width:4%;padding-top:10px">
+                          <p style="font-size:19px;margin-top:5px">
+
+                            <span t-esc="nb_enfant"/>
+                          </p>
+                        </td>
+
+                        <td style="width:21%;padding-top:15px">
+                          <p style="font-size:19px; solid;border-bottom:1px solid white;margin-left:10px;margin-top:5px">
+                            Noms des enfants à charge:
+                          </p>
+                        </td>
+                        <td style="width:54%;font-size:19px;padding-top:15px">
+
+                          <span t-foreach="o.employee_id.relation_ids" t-as="enfant" style="margin-top:-30px">
+
+                            <span t-if="enfant.type == 'enfant'">
+                            <span t-field="enfant.prenom"/> <span t-field="enfant.nom"/><span>,</span>
+                            </span>
+                              <span><![CDATA[&nbsp;]]></span>
+
+                          </span>
+
+                        </td>
+                      </tr>
+
+                    </table>
+
+                  </div>
+
+                </div>
+
+                <div class="row" style="margin-top:3px">
+                  <div class="col-12" style="width:100%;padding-top:-10%;">
+
+                    <table style="width:100%;border-collapse:collapse">
+                      <tr>
+                        <td style="width:100%;">
+                          <p style="font-size:19px;solid;border-bottom:1px solid grey;color:white"></p>
+                        </td>
+
+                      </tr>
+
+                    </table>
+
+                  </div>
+
+                </div>
+
+                <div class="row" style="margin-left:10px;margin-top:2px">
+                  <div class="col-12" style="width:100%;padding-top:-10%;">
+
+                    <table style="width:100%;border-collapse:collapse">
+                      <tr>
+                        <td style="width:25%;padding-top:10px">
+                          <p style="font-size:19px;height:40px;margin-left:10px solid;border-bottom:1px solid white                                                           ">
+                            Date d'entrée dans l'établissement:
+
+                          </p>
+                        </td>
+
+                        <td style="width:75%">
+                          <p style="font-size:19px;border-bottom:1px solid grey;margin-top:-10px">
+                            <span t-field="o.date_entree"/>
+                          </p>
+                        </td>
+                      </tr>
+                    </table>
+
+                  </div>
+
+                </div>
+
+                <div class="row" style="margin-top:-15px;margin-left:10px">
+                  <div class="col-12" style="width:100%;padding-top:-10%;">
+
+                    <table style="width:100%;border-collapse:collapse">
+                      <tr>
+                        <td style="width:49%;padding-top:10px">
+                          <p style="font-size:19px;height:40px; solid;border-bottom:1px solid white                                                           ">
+                            N°et date de la déclaration d'embauche effectuée lors de l'engagement:
+
+                          </p>
+                        </td>
+
+                        <td style="width:51%">
+                          <p style="font-size:19px;border-bottom:1px solid grey;margin-top:-10px">
+                            (NA)
+
+                          </p>
+                        </td>
+                      </tr>
+                    </table>
+
+                  </div>
+
+                </div>
+                <div class="row" style="margin-top:-15px">
+                  <div class="col-12" style="width:100%;padding-top:-10%;">
+
+                    <table style="width:100%;border-collapse:collapse">
+                      <tr>
+                          <!--
+                        <td style="width:9%;padding-top:10px">
+                          <p style="font-size:19px;height:40px; solid;border-bottom:1px solid white;margin-left:10px">
+                            Profession:
+                          </p>
+                        </td>
+                        <td style="width:34%">
+                          <p style="font-size:19px;border-bottom:1px solid grey;margin-top:-10px">
+                            <span t-field="o.employee_id.job_id"/>
+
+                          </p>
+                        </td>
+                         -->
+                        <td style="width:23%;padding-top:10px">
+                          <p style="font-size:19px;height:40px; solid;border-bottom:1px solid white;margin-left:10px">
+                            Emploi dans l'établissement:
+                          </p>
+                        </td>
+                        <td style="width:70%">
+                          <p style="font-size:19px;border-bottom:1px solid grey;margin-top:-10px">
+
+                            <span t-field="o.employee_id.job_id"/>
+
+                          </p>
+                        </td>
+                      </tr>
+
+                    </table>
+
+                  </div>
+
+                </div>
+
+                <div class="row" style="margin-top:-15px">
+                  <div class="col-12" style="width:100%;padding-top:-10%;">
+
+                    <table style="width:100%;border-collapse:collapse">
+                      <tr>
+                        <td style="width:16%;padding-top:10px">
+                          <p style="font-size:19px;height:40px; solid;border-bottom:1px solid white;margin-left:10px">
+                            Convention collective:
+                          </p>
+                        </td>
+                        <td style="width:37%">
+                          <p style="font-size:19px;border-bottom:1px solid grey;margin-top:-10px">
+
+                            <span t-field="o.convention_id.name"/>
+                          </p>
+                        </td>
+
+                        <td style="width:8%;padding-top:10px">
+                          <p style="font-size:19px;height:40px; solid;border-bottom:1px solid white;margin-left:10px">
+                            Catégorie
+                          </p>
+                        </td>
+                        <td style="width:39%">
+                          <p style="font-size:19px;border-bottom:1px solid grey;margin-top:-10px">
+                            <span t-field="o.convention_id.conv_id.name"/>
+
+                          </p>
+                        </td>
+                      </tr>
+
+                    </table>
+
+                  </div>
+
+                </div>
+
+                <div class="row" style="margin-top:-15px">
+                  <div class="col-12" style="width:100%;padding-top:-10%;">
+
+                    <table style="width:100%;border-collapse:collapse">
+                      <tr>
+                        <td style="width:23%;padding-top:10px">
+                          <p style="font-size:19px;height:40px; solid;border-bottom:1px solid white;margin-left:10px">
+                            Eventuellement,date du contrat:
+                          </p>
+                        </td>
+                        <td style="width:77%">
+                          <p style="font-size:19px;border-bottom:1px solid grey;margin-top:-10px">
+                            <span t-field="o.date_start"/>
+
+                          </p>
+                        </td>
+
+                      </tr>
+
+                    </table>
+
+                  </div>
+
+                </div>
+
+                <div class="row" style="margin-top:-15px">
+                  <div class="col-12" style="width:100%;padding-top:-10%;">
+
+                    <table style="width:100%;border-collapse:collapse">
+                      <tr>
+                        <td style="width:55%;padding-top:10px">
+                          <p style="font-size:19px;height:40px; solid;border-bottom:1px solid white;margin-left:10px">
+                            N°et date du visa d'approbation par l'inspection du travail et de la sécurité sociale:
+                          </p>
+                        </td>
+                        <td style="width:45%">
+                          <p style="font-size:19px;border-bottom:1px solid grey;margin-top:-10px">
+
+                            ////
+                          </p>
+                        </td>
+
+                      </tr>
+
+                    </table>
+
+                  </div>
+
+                </div>
+
+                <div class="row" style="margin-top:-15px">
+                  <div class="col-12" style="width:100%;padding-top:-10%;">
+
+                    <table style="width:100%;border-collapse:collapse">
+                      <tr>
+                        <td style="width:39%;padding-top:10px">
+                          <p style="font-size:19px;height:40px; solid;border-bottom:1px solid white;margin-left:10px">
+                            N° et date du visa d'enregistrement à la section locale de:
+                          </p>
+                        </td>
+                        <td style="width:31%;">
+                          <p style="font-size:19px;border-bottom:1px solid grey;margin-top:-10px">
+                            /////
+                          </p>
+                        </td>
+                        <td style="width:22%">
+                          <p style="font-size:19px;border-bottom:1px solid white;margin-top:-10px;margin-left:5px">
+                            du service de la main d'oeuvre
+
+                          </p>
+                        </td>
+                        <td style="width:8%;">
+                          <p style="font-size:19px;border-bottom:1px solid grey;margin-top:-10px">
+                            /////
+                          </p>
+                        </td>
+
+                      </tr>
+
+                    </table>
+
+                  </div>
+
+                </div>
+
+                <div class="row" style="margin-top:-15px">
+                  <div class="col-12" style="width:100%;padding-top:-10%;">
+
+                    <table style="width:100%;border-collapse:collapse">
+                      <tr>
+                        <td style="width:100%;">
+                          <p style="font-size:19px;solid;border-bottom:1px solid grey;margin-left:10px">
+                            //////
+                          </p>
+                        </td>
+
+                      </tr>
+
+                    </table>
+
+                  </div>
+
+                </div>
+
+                <div class="row" style="">
+                  <div class="col-12" style="width:100%;padding-top:-10%;">
+
+                    <table style="width:100%;border-collapse:collapse">
+                      <tr>
+                        <td style="width:47%;padding-top:10px">
+                          <p style="font-size:19px;height:40px; solid;border-bottom:1px solid white;margin-left:10px;">
+                            Raison sociale et adresse précise de l'établissement de l'employeur:
+                          </p>
+                        </td>
+                        <td style="width:53%">
+                          <p style="font-size:19px;border-bottom:1px solid grey;margin-top:-10px">
+                            <span t-field="o.company_id"/>
+                          </p>
+                        </td>
+
+                      </tr>
+
+                    </table>
+
+                  </div>
+
+                </div>
+
+                <div class="row" style="">
+
+                  <div class="col-12" style="width:100%;padding-top:-10%;">
+
+                    <table style="width:100%;border-collapse:collapse">
+                      <tr>
+                        <td style="width:100%;">
+                          <p style="font-size:19px;solid;border-bottom:1px solid grey;margin-left:10px;font-weight:bold;font-style:italic">
+                            <span t-field="o.company_id.street"/>
+                          </p>
+                        </td>
+
+                      </tr>
+
+                    </table>
+
+                  </div>
+
+                </div>
+
+                <div class="row" style="">
+                  <div class="col-12" style="width:100%;padding-top:-10%;">
+
+                    <table style="width:100%;border-collapse:collapse">
+                      <tr>
+                        <td style="width:20%;padding-top:10px">
+                          <p style="font-size:19px;height:40px; solid;border-bottom:1px solid white;margin-left:10px">
+                            Activité de l'établissement:
+                          </p>
+                        </td>
+                        <td style="width:80%">
+                          <p style="font-size:19px;border-bottom:1px solid grey;margin-top:-10px;font-weight:bold;font-style:italic">
+                              <span t-field="o.company_id.activite"></span>
+                          </p>
+                        </td>
+
+                      </tr>
+
+                    </table>
+
+                  </div>
+
+                </div>
+
+                <div class="row" style="border-top:2px solid black;">
+                  <div class="col-12" style="width:100%;padding-top:-10%;">
+
+                    <table style="width:100%;">
+                      <tr>
+                        <td style="width:%;padding-top:10px" colspan="4">
+                          <p style="font-size:19px;solid;border-bottom:1px solid white;margin-left:150px;font-weight:bold">
+                            Durée du contrat:
+                          </p>
+
+                        </td>
+
+                      </tr>
+                      <tr>
+                        <td style="width:30%;padding-top:20px">
+                          <p style="font-size:19px;; solid;border-bottom:1px solid white;margin-left:150px;margin-top:-9px">
+                              <span t-if="o.typeContract == 'cdd'">à durée déterminée du</span>
+                                <span t-if="o.typeContract == 'cdi'" style="text-decoration:line-through;">à durée déterminée du</span>
+                          </p>
+                        </td>
+                        <td style="width:33%;">
+                          <p style="font-size:19px;; solid;border-bottom:1px solid black;padding-top:-45px">
+                            <span t-if="o.typeContract == 'cdd'" t-field="o.date_start"/>
+                              <span t-if="o.typeContract == 'cdi'">/////</span>
+
+                          </p>
+
+                        </td>
+                        <td style="width:4%;">
+                          <p style="font-size:19px;;border-bottom:1px solid white;margin-top:9px">
+                            <span><![CDATA[&nbsp;]]></span> <span><![CDATA[&nbsp;]]></span> au
+                          </p>
+
+                        </td>
+                        <td style="width:33%;">
+                          <p style="font-size:19px;solid;border-bottom:1px solid black;padding-top:-45px">
+
+                            <span t-if="o.typeContract == 'cdd'" t-field="o.date_end"/>
+                            <span t-if="o.typeContract == 'cdi'">/////</span>
+
+                          </p>
+
+                        </td>
+
+                      </tr>
+                      <tr>
+                        <td style="width:27%;padding-top:30px">
+                          <p style="font-size:19px;solid;border-bottom:1px solid white;margin-left:150px;margin-top:-20px;padding-left:4px">
+                           <span t-if="o.typeContract == 'cdi'" style="border:1px solid"><![CDATA[&nbsp;]]> ou à durée indeterminée :
+                            </span>
+                                <span t-if="o.typeContract == 'cdd'"><![CDATA[&nbsp;]]> ou à durée indeterminée :
+                            </span>
+                          </p>
+                        </td>
+
+                        <td style="width:73%;" colspan="3" align="left">
+                          <p style="font-size:19px;border-bottom:1px solid black;">
+                                <![CDATA[&nbsp;]]>
+                            <span t-if="o.typeContract == 'cdi'" t-field="o.date_start"/>
+
+                          </p>
+
+                        </td>
+
+                      </tr>
+
+                      <tr>
+                        <td style="100%;padding-top:20px" colspan="3">
+                          <p style="font-size:19px;;solid;border-bottom:1px solid white;margin-left:250px;margin-top:-17px;font-style:italic;width:100%;">
+                            (Rayée la mention inutile et encadrer la mention correcte) :
+                          </p>
+                        </td>
+
+                      </tr>
+                      <tr>
+                        <td align="right" style="width:30%;padding-top:30px" colspan="2">
+                          <p style="font-size:19px;;solid;border-bottom:1px solid white;margin-left:260px;margin-top:-30px">
+                            chantier de :
+                          </p>
+
+                        </td>
+                        <td style="70%;padding-top:20px" colspan="2">
+                          <p style="font-size:19px;;solid;border-bottom:1px solid grey;margin-top:-30px;">
+                            <span t-field="o.employee_id.work_location"/>
+                          </p>
+
+                        </td>
+                      </tr>
+                      <tr></tr>
+
+                    </table>
+
+                  </div>
+
+                </div>
+
+                <div style="padding-bottom:10px;border-top:2px solid;width:100%;padding-bottom:25px;padding-top:20px">
+                  <table style="width:100%">
+                    <tr>
+                      <td style="width:30%;padding-top:20px">
+                        <p style="font-size:19px;solid;border-bottom:1px solid white;margin-left:10px;margin-top:-20px">
+                          Nom et adresse du précédent employeur:
+                        </p>
+                      </td>
+                      <td style="width:70%;" colspan="3">
+                        <p style="font-size:19px;;solid;border-bottom:1px solid grey;margin-top:-7px;">
+                            <span t-field="o.nom_employee"></span>
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="width:100%;padding-top:20px" colspan="4">
+                        <p style="font-size:19px;;solid;border-bottom:1px solid white;margin-left:10px;margin-top:-20px">
+                          Si le travailleur bénéficie de l'article 107 du code du travail:
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="width:30%;padding-top:20px">
+                        <p style="font-size:19px;;solid;border-bottom:1px solid white;margin-left:10px;margin-top:-20px">
+                          Lieu de résidence habituelle du travailleur:
+                        </p>
+                      </td>
+                      <td style="width:25%;">
+                        <p style="font-size:19px;;solid;border-bottom:1px solid grey;margin-top:-10px;">
+                          /////
+                        </p>
+                      </td>
+                      <td style="width:22%;padding-top:20px">
+                        <p style="font-size:19px;;solid;border-bottom:1px solid white;margin-left:10px;margin-top:-20px">
+                          Date d'entrée au Sénégal:
+                        </p>
+                      </td>
+                      <td style="width:25%;">
+                        <p style="font-size:19px;;solid;border-bottom:1px solid grey;margin-top:-10px;">
+                          <span t-field="o.employee_id.date_entree_senegal"/> 
+                          
+                        </p>
+                      </td>
+                    </tr>
+
+                  </table>
+                </div>
+
+              </div>
+            </div>
+            <div class="row border_2px" style="width:100%;margin-top:100px;height:100%">
+
+              <div class="col-12">
+                <p style="font-size:25px;font-weight:bold;solid;margin-top:10px;margin-left:10px">
+                  STATUT MILITAIRE
+                </p>
+                <p style="font-size:19px;font-style:italic;margin-top:20px;margin-left:100px">
+                  (Rayer les mentions inutiles)
+                </p>
+
+                <div style="margin-top:20px">
+                  <table style="width:100%">
+                    <tr>
+                      <td style="width:6%;padding-top:20px">
+                        <p style="font-size:19px;solid;border-bottom:1px solid white;margin-left:10px;">
+                          Classe de recrutement:
+                        </p>
+                      </td>
+                      <td style="width:94%;">
+                        <p style="font-size:22px;solid;font-style:italic;font-weight:bold;border-bottom:1px solid grey;margin-left:-235px;font-style:italic">
+
+                          &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; N
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="width:35%;padding-top:20px">
+                        <p style="font-size:19px;solid;border-bottom:1px solid white;margin-left:10px;">
+                          L'intéressé a t-il effectué son service millitaire?
+                        </p>
+                      </td>
+                      <td style="width:65%;">
+                        <p style="font-size:22px;;solid;border-bottom:1px solid grey;font-style:italic;font-weight:bold;margin-left:-40px;font-style:italic">
+                          &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; E
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="width:23%;padding-top:20px">
+                        <p style="font-size:19px;solid;border-bottom:1px solid white;margin-left:10px;">
+                          Armée d'appartenance:terre-mer-air:
+                        </p>
+                      </td>
+                      <td style="width:77%;">
+                        <p style="font-size:22px;;solid;border-bottom:1px solid grey;font-style:italic;font-weight:bold;margin-left:-130px;font-style:italic">
+                          &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;
+                          &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; A
+
+                        </p>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style="width:25%;padding-top:20px">
+                        <p style="font-size:19px;solid;border-bottom:1px solid white;margin-left:10px;">
+                          Grade dans la reserve:Officier-Sous-officier-Troupe:
+                        </p>
+                      </td>
+                      <td style="width:75%;">
+                        <p style="font-size:22px;;solid;border-bottom:1px solid grey;font-style:italic;font-weight:bold;margin-left:-4px;font-style:italic">
+                          &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;
+                          &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; N
+
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="width:25%;padding-top:20px">
+                        <p style="font-size:19px;solid;border-bottom:1px solid white;margin-left:10px;"></p>
+                      </td>
+                      <td style="width:75%;">
+                        <p style="font-size:22px;;solid;border-bottom:1px solid white;font-style:italic;font-weight:bold;margin-left:-10px;font-style:italic">
+                          &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;
+                          &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; T
+
+                        </p>
+
+                      </td>
+                    </tr>
+
+                  </table>
+                  <p style="font-size:25px;font-weight:bold;solid;margin-top:20px;margin-left:10px">
+                    DISPOSITIONS PARTICULIERS CONCERNANT L'ENGAGEMENT:
+                  </p>
+                  <p style="font-size:19px;font-style:italic;margin-top:-20px;margin-left:130px">
+                    (auquelles les parties ont expressément souscrit)
+                  </p>
+                  <p style="font-size:19px;solid;margin-top:20px;margin-left:10px">
+                    1) Le salaire du travailleur sera fixé pour la 9 de la Convention Collective du Commerce en fonction d'un horaire de travail hebdomadaire de
+                  </p>
+                  <p style="font-size:22px;solid;margin-top:50px;border-right:2px solid;border-top:2px solid;border-bottom:2px solid;font-weight:bold;width:15%;height:20px;padding:10px;">
+                    40 heures &amp;nbsp; &amp;nbsp;
+                  </p>
+                  <p style="font-size:22px;solid;margin-top:22px;margin-left:10px;width:15%;height:20px">
+                    42 heures &amp;nbsp; &amp;nbsp;
+                  </p>
+                  <p style="font-size:22px;solid;margin-top:22px;margin-left:10px;width:15%;height:20px">
+                    44 heures &amp;nbsp; &amp;nbsp;
+                  </p>
+                  <p style="font-size:22px;solid;margin-top:22px;margin-left:10px;width:15%;height:20px">
+                    45 heures &amp;nbsp; &amp;nbsp;
+                  </p>
+                  <p style="font-size:22px;solid;margin-top:22px;margin-left:10px;width:15%;height:20px">
+                    60 heures &amp;nbsp; &amp;nbsp;
+                  </p>
+                    
+                     <p style="font-size:22px;solid;margin-top:22px;margin-left:10px;width:15%;height:20px">
+                    soit:
+                  </p>
+                </div>
+                  
+                   <!--
+                  
+                <div style="margin-top:20px">
+                     <p style="font-size:22px;">
+                          soit:
+                        </p>
+                     
+                  <table style="width:100%;border-collapse:collapse">
+                   
+                      
+                      <tr>
+                      <td style="width:15%;padding-top:10px">
+                        <p style="font-size:22px;solid;border-bottom:1px solid white;margin-left:10px;">
+                          soit:
+                        </p>
+                      </td>
+                        
+                      <td style="width:85%;">
+                        <p style="font-size:25px;solid;border-bottom:1px solid grey;margin-left:-80px;">
+
+                          Salaire de Base mensuel:
+                        </p>
+                      </td>
+                        
+                    </tr>
+                      
+                    <tr>
+                      <td style="width:15%;padding-top:10px">
+                        <p style="font-size:19px;solid;border-bottom:1px solid white;margin-left:10px;">
+                          &amp;nbsp;
+                        </p>
+                      </td>
+                      <td style="width:85%;">
+                        <p style="font-size:25px;solid;border-bottom:1px solid grey;margin-left:-80px;">
+
+                          Sursalaire:
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="width:15%;padding-top:10px">
+                        <p style="font-size:19px;solid;border-bottom:1px solid white;margin-left:10px;">
+                          &amp;nbsp;
+                        </p>
+                      </td>
+                      <td style="width:85%;">
+                        <p style="font-size:25px;solid;border-bottom:1px solid grey;margin-left:-80px;">
+
+                          Prime de Transport
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="width:15%;padding-top:10px">
+                        <p style="font-size:19px;solid;border-bottom:1px solid white;margin-left:10px;">
+                          &amp;nbsp;
+                        </p>
+                      </td>
+                      <td style="width:85%;">
+                        <p style="font-size:25px;solid;border-bottom:1px solid grey;margin-left:-80px;font-weight:bold">
+
+                          Salaire Brut
+                        </p>
+                      </td>
+                    </tr>
+                   
+                  </table>
+                 
+                </div>
+                 -->
+                  
+                <p >
+                  &amp;nbsp;
+                </p>
+                <p >
+                  &amp;nbsp;
+                </p>
+                <p style="font-size:19px;margin-left:100px;">
+                  Signature du travailleur:
+                </p>
+                <p style="font-size:19px;margin-left:20px;">
+                  (précédée de la mention manuscrite:pour accord) &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;
+                  &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; Signature de l'employeur
+                </p>
+                <div style="padding-left:10px;margin-top:300px;border-top:2px solid;width:100%">
+
+                  <p style="font-size:19px;padding-top:3Opx;margin-left:1Opx;width:100%;">
+
+                    P.S.-N.B.:1) La déclaration de mouvement du travailleur est à établir en trois exemplaires dûmes signés par l'employeur et le
+
+                  </p>
+                  <p style="font-size:19px;margin-top:10px;padding-top:3Opx;width:100%;">
+
+                    travailleur.Un exemplaire est remis au travailleur.Le second est concervé par l'employeur. le troixième est deposé:
+
+                  </p>
+                  <p style="font-size:19px;margin-top:10px;width:100%;padding-left:3Opx">
+
+                    dans l'intérieur: à la Section Locale du Service de la Main-d'oeuvre, à l'inspection Régionale du Travail et de la Sécurité Socila du
+
+                  </p>
+                  <p style="font-size:19px;margin-top:10px;width:100%;padding-left:3Opx">
+
+                    ressort à Dakar:au bureau central du Service de la Main-d'oeuvre.
+
+                  </p>
+                  <p style="font-size:19px;margin-top:10px;padding-left:3Opx;width:100%;">
+
+                    2)L'employeur doit OBLIGATOIREMENT delivrer une ampliation du mouvement au travailleur.
+
+                  </p>
+                  <p style="font-size:19px;margin-top:10px;width:100%;padding-left:3Opx">
+
+                    3)Sont provisoirement exemptés de la declaration du mouvement.
+
+                  </p>
+                  <p style="font-size:19px;margin-top:10px;width:100%;">
+
+                    &amp;nbsp; &amp;nbsp;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;Les travailleurs journaliers effectivement payés tous les jours.
+
+                  </p>
+                  <p style="font-size:19px;width:100%;margin-top:40px">
+                    &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp; &amp;nbsp; Les manoeuvres ordinaires dans toutes les branches d'activité.
+
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </t>
+      </t>
+
+    </template>
+
+  </data>
+</odoo>

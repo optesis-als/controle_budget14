@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        
+         
+
+        <record model="ir.module.category" id="base.module_category_payroll_localization">
+            <field name="name">Payroll</field>
+            <field name="visible" eval="0" />
+        </record>
+                 
+        <!--group-->
+        <record id="group_hr_payroll_user" model="res.groups">
+            <field name="name">Agent de paie</field>
+            <field name="category_id" ref="base.module_category_payroll_localization"/>
+             <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        </record>
+       
+
+        <record id="group_hr_payroll_manager" model="res.groups">
+            <field name="name">Responsable Paie</field>
+            <field name="category_id" ref="base.module_category_payroll_localization"/>
+            <field name="implied_ids" eval="[(4, ref('optesis_hr_payroll.group_hr_payroll_user'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        </record>
+        
+        
+         <record id="group_hr_payroll_directeur_rh" model="res.groups">
+            <field name="name">Directeur RH</field>
+            <field name="category_id" ref="base.module_category_payroll_localization"/>
+            <field name="implied_ids" eval="[(4, ref('optesis_hr_payroll.group_hr_payroll_user')), (4, ref('optesis_hr_payroll.group_hr_payroll_manager'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        </record>
+        
+          <record id="group_hr_payroll_res_comptable" model="res.groups">
+            <field name="name">Responsable comptable </field>
+            <field name="category_id" ref="base.module_category_payroll_localization"/>
+              <field name="implied_ids" eval="[(4, ref('optesis_hr_payroll.group_hr_payroll_user')), (4, ref('optesis_hr_payroll.group_hr_payroll_manager')),  (4, ref('optesis_hr_payroll.group_hr_payroll_directeur_rh'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        </record>
+        
+        
+        <!--fin pour les group -->
+        
+
+        <record id="base.default_user" model="res.users">
+            <field name="groups_id" eval="[(4,ref('optesis_hr_payroll.group_hr_payroll_manager'))]"/>
+        </record>
+
+        <record id="hr_payroll_rule_officer" model="ir.rule">
+            <field name="name">Officer and subordinates Payslip</field>
+            <field name="model_id" ref="model_hr_payslip"/>
+            <field name="domain_force">['|','|', ('employee_id.user_id', '=', user.id), ('employee_id.department_id',
+                '=', False), ('employee_id.department_id.manager_id.user_id', '=', user.id)]
+            </field>
+            <field name="groups" eval="[(4, ref('optesis_hr_payroll.group_hr_payroll_user'))]"/>
+        </record>
+
+        <record id="hr_payslip_rule_manager" model="ir.rule">
+            <field name="name">All Payslip</field>
+            <field name="model_id" ref="model_hr_payslip"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4, ref('optesis_hr_payroll.group_hr_payroll_manager'))]"/>
+        </record>
+        
+        
+        <!--filter par société-->
+         
+        
+         <record model="ir.rule" id="payslip_hr">
+            <field name="name">Payslip</field>
+            <field name="model_id" search="[('model','=','hr.payslip')]" model="ir.model"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+        
+        <record model="ir.rule" id="payslip_line_hr">
+            <field name="name">Payslip line </field>
+            <field name="model_id" search="[('model','=','hr.payslip.line')]" model="ir.model"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+        
+          <record model="ir.rule" id="payslip_worked_day">
+            <field name="name">Jours travaillés</field>
+            <field name="model_id" search="[('model','=','hr.payslip.worked_days')]" model="ir.model"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+        
+         <record model="ir.rule" id="payslip_input">
+            <field name="name">Entrées</field>
+            <field name="model_id" search="[('model','=','hr.payslip.input')]" model="ir.model"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+        
+         <record model="ir.rule" id="payslip_run">
+            <field name="name">Lots de bulletins</field>
+            <field name="model_id" search="[('model','=','hr.payslip.run')]" model="ir.model"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+        
+       
+        
+           <record model="ir.rule" id="hr_payroll_structure_securits">
+            <field name="name">Structures de salaires</field>
+            <field name="model_id" search="[('model','=','hr.payroll.structure')]" model="ir.model"/>
+            <field name="global" eval="True"/>
+           <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+        
+     
+         <record model="ir.rule" id="hr_salary_regle_securits">
+            <field name="name">les règles salariale</field>
+            <field name="model_id" search="[('model','=','hr.salary.rule')]" model="ir.model"/>
+            <field name="global" eval="True"/>
+           <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+      
+         
+        
+         <record model="ir.rule" id="hr_salary_rule_categorys">
+            <field name="name">catégories des règles de salaires</field>
+            <field name="model_id" search="[('model','=','hr.salary.rule.category')]" model="ir.model"/>
+            <field name="global" eval="True"/>
+           <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+        
+        
+         <record model="ir.rule" id="contribution_categorys">
+            <field name="name">Contribution register</field>
+            <field name="model_id" search="[('model','=','hr.contribution.register')]" model="ir.model"/>
+            <field name="global" eval="True"/>
+           <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+        
+          <record model="ir.rule" id="rule_input">
+            <field name="name">Rule input</field>
+            <field name="model_id" search="[('model','=','hr.rule.input')]" model="ir.model"/>
+            <field name="global" eval="True"/>
+           <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+        
+        
+          <record model="ir.rule" id="hr_contrat_id">
+            <field name="name">Contrat</field>
+            <field name="model_id" search="[('model','=','hr.contract')]" model="ir.model"/>
+            <field name="global" eval="True"/>
+             <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+        
+        
+         <record model="ir.rule" id="hr_config_id">
+            <field name="name">Configuration</field>
+            <field name="model_id" search="[('model','=','res.config.settings')]" model="ir.model"/>
+            <field name="global" eval="True"/>
+             <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+        
+        
+       
+       
+    </data>
+</odoo>

@@ -1,0 +1,774 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <template id="contrat_cdi">
+      <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+
+          <div class="page" style="margin-top:-5px;padding-top:-5px;">
+            <style>
+              p {
+                font-family: "Times New Roman", Times, serif;
+              }
+              .border_2px {
+                border: 2px solid;
+                width: 100%;
+              }
+              .border_1px {
+                border: 2px solid;
+              }
+              .table_configuration {
+                width: 100%;
+                border-collapse: collapse;
+              }
+              .border_small_paragraph:after {
+                content: "";
+                /* This is necessary for the pseudo element to work. */
+                display: block;
+                /* This will put the pseudo element on its own line. */
+                margin: 0 auto;
+                /* This will center the border. */
+                width: 15%;
+                /* Change this to whatever width you want. */
+                padding-top: -10px;
+                /* This creates some space between the element and the border. */
+                border-bottom: 1px solid black;
+                /* This creates the border. Replace black with whatever color you want. */
+              }
+            </style>
+            <div class="row">
+              <div class="col-12">
+                <p style="font-size:30px;padding-top:80px;font-weight:bold" align="center">
+                  CONTRAT DE TRAVAIL A DUREE INDETERMINEE
+                </p>
+                <div style="width:30%;border-top:1px solid;margin-top:-30px;margin-left:35%"></div>
+                <p style="font-size:25px;height:50px;margin-top:100px;font-weight:bold" align="left">
+                  ENTRE :
+                </p>
+                <p style="font-size:25px;height:50px;margin-top:-30px;" align="left">
+                  <span t-field="o.company_id.resume_entreprise"/>
+                </p>
+                <p style="font-size:25px;margin-left:50%;margin-top:120px">
+
+                  Ci-après dénommé «
+                  <span style="font-weight:bold" t-field="o.company_id.name"/>
+                  <span>»,</span>
+                </p>
+                <p style="font-size:25px;margin-left:50%;margin-top:-20px">
+
+                  D’une part,
+                </p>
+                <p style="font-size:25px;font-weight:bold;margin-top:20px">
+                  ET :
+                </p>
+                <table style="width:100%;border-collapse:collapse">
+                  <tr>
+                    <td style="width:30%">
+                      <p style="font-size:25px;">Nom et prénom(s) :</p>
+                    </td>
+                    <td style="width:70%;">
+                      <p style="font-size:25px;">
+                        <span t-field="o.employee_id.name"/></p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width:30%">
+                      <p style="font-size:25px;">Date et lieu de naissance :</p>
+                    </td>
+                    <td style="width:70%;">
+                      <p style="font-size:25px;margin-top:10px"><span t-field="o.employee_id.birthday"/>/<span t-field="o.employee_id.place_of_birth"/>/<span t-field="o.employee_id.country_of_birth"/></p>
+                    </td>
+
+                  </tr>
+                  <tr>
+                    <td style="width:30%">
+                      <p style="font-size:25px;">Situation de famille :</p>
+                    </td>
+                    <td style="width:70%;">
+                      <p style="font-size:25px;margin-top:10px">
+                        <span t-field="o.employee_id.marital"/></p>
+                    </td>
+
+                  </tr>
+                  <tr>
+                    <td style="width:30%">
+                      <p style="font-size:25px;">Carte Nationale d’identité :</p>
+                    </td>
+                    <td style="width:70%;">
+                      <p style="font-size:25px;margin-top:10px">
+                        <span t-field="o.employee_id.identification_id"></span>
+                      </p>
+                    </td>
+
+                  </tr>
+                  <tr>
+                    <td style="width:30%">
+                      <p style="font-size:25px;">Prénom(s) du père :</p>
+                    </td>
+                    <td style="width:70%;">
+                      <p style="font-size:25px;margin-top:10px">
+                        <span t-field="o.employee_id.p_pere"/></p>
+                    </td>
+
+                  </tr>
+                  <tr>
+                    <td style="width:30%">
+                      <p style="font-size:25px;">Nom et prénom(s) de la mère :</p>
+                    </td>
+                    <td style="width:70%;">
+                      <p style="font-size:25px;margin-top:10px">
+                        <span t-field="o.employee_id.p_mere"/></p>
+                    </td>
+
+                  </tr>
+                  <tr>
+                    <td style="width:30%">
+                      <p style="font-size:25px;">Adresse :</p>
+                    </td>
+                    <td style="width:70%;">
+                      <p style="font-size:25px;margin-top:10px">
+                        <span t-field="o.employee_id.adresse"/></p>
+                    </td>
+
+                  </tr>
+                  <tr>
+                    <td style="width:30%">
+                      <p style="font-size:25px;">Nationalité :</p>
+                    </td>
+                    <td style="width:70%;">
+                      <p style="font-size:25px;margin-top:10px">
+                        <span t-field="o.employee_id.country_id"/></p>
+                    </td>
+
+                  </tr>
+                  <tr>
+                    <td style="width:30%">
+                      <p style="font-size:25px;">Lieu d’exécution du contrat :</p>
+                    </td>
+                    <td style="width:70%;">
+                      <p style="font-size:25px;margin-top:10px"><span t-field="o.company_id.street"/></p>
+                    </td>
+
+                  </tr>
+                  <tr>
+                    <td style="width:30%">
+                      <p style="font-size:25px;">Date d’engagement :</p>
+                    </td>
+                    <td style="width:70%;">
+                      <p style="font-size:25px;margin-top:10px"><span t-field="o.date_start"/></p>
+                    </td>
+
+                  </tr>
+                </table>
+
+                <p style="font-size:25px;margin-left:50%;margin-top:100px">
+
+                  Ci-après dénommé
+                  <span style="font-weight:bold">
+                    « L'Employee »,
+                  </span>
+                </p>
+                <p style="font-size:25px;margin-left:50%;margin-top:-20px">
+
+                  D’autre part,
+                </p>
+                <p style="font-size:25px;margin-top:90px;font-weight:bold">
+                  IL EST CONVENU CE QUI SUIT :
+                </p>
+                <p style="font-size:25px;">
+                  L’employé titulaire du présent contrat est engagé aux conditions ci-après. Cet engagement est régi par les textes suivants :
+                </p>
+                <p style="font-size:25px;margin-left:30px">
+                  - Loi n° 97-17 du 1er décembre 1997 portant Code du Travail au Sénégal, ensemble des règlements
+                  <br/>
+                  &amp;nbsp; d’application de cette loi .
+
+                </p>
+                <p style="font-size:25px;margin-left:30px;margin-top:-10px">
+
+                  - Convention Collective Nationale Interprofessionnelle du Sénégal du 30 Décembre, ensemble des
+                  <br/>
+                  &amp;nbsp; avenants et décisions qui viendraient à la compléter ou à la modifier .
+
+                </p>
+                <p style="font-size:25px;margin-left:30px;margin-top:-10px">
+
+                  - Convention Collective des assurances.
+
+                </p>
+                <p style="font-size:25px;margin-left:30px;margin-top:-10px">
+
+                  - Règlement intérieur de l’entreprise.
+
+                </p>
+                  
+                <p style="font-weight:bold;border-top:1px solid;width:100%;margin-top:180px"></p>
+                <p style="font-size:25px;margin-top:-10px" align="center">
+                  page 1 sur 5
+                </p>  
+                <p style="page-break-after: always;" ></p>
+                  
+                  
+                <p style="font-size:25px;margin-top:50px;padding-top:50px;">
+
+                  <span style="font-weight:bold;border-bottom:1px solid">
+                    Article 1 :
+                  </span>
+                  <span style="font-weight:bold;">
+                    OBJET
+                  </span>
+
+                </p>
+                <p style="font-size:25px;margin-top:30px">
+
+                  <span>Le présent contrat a pour objet de définir les conditions de l’engagement par <span t-field="o.company_id.name"></span> 
+                      
+                      <span t-if="o.employee_id.gender == 'female'">
+                          <span>
+                              de Madame
+                          </span>
+                          <span t-field="o.employee_id.name">
+                        
+                          </span>
+                      </span>
+                      
+                       <span t-if="o.employee_id.gender == 'female'">
+                          <span>
+                              de Monsieur
+                          </span>
+                          <span t-field="o.employee_id.name">
+                        
+                          </span>
+                      </span>
+                    </span>
+                  
+                  <span>qui se déclare libre de tout engagement professionnel.</span>
+
+                </p>
+                          
+                  
+                <p style="font-size:25px;margin-top:30px"></p>  
+                <p style="font-size:25px;margin-top:40px">
+
+                  <span style="font-weight:bold;border-bottom:1px solid">
+                    Article 2 :
+                  </span>
+                  <span style="font-weight:bold;">
+                    DUREE ET PERIODE D’ESSAI
+
+                  </span>
+
+                </p>
+
+                
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+
+                <p style="font-size:25px;margin-top:40px">
+                  <span >Le présent contrat est conclu à compter du
+                  </span>
+                  <span t-field="o.date_start"/>
+                  <span>
+                      et assorti <span t-field="o.periode_essai"></span>
+                      <span t-if="o.periode_essai == 'avec'">
+                          <span>de</span>
+                          <span t-field="o.duree"></span> mois.
+                      </span>
+                      <span t-if="o.periode_essai == 'sans'">
+                          <span>.</span>
+                      </span>
+                  </span>
+
+                </p>
+                <p style="font-size:25px;margin-top:40px">
+
+                  <span style="font-weight:bold;border-bottom:1px solid">
+                    Article 3 :
+                  </span>
+                  <span style="font-weight:bold;">
+                    ANCIENNETE
+
+                  </span>
+
+                </p>
+                <p style="font-size:25px;margin-top:-10px">
+                  La date de l’ancienneté retenue pour l’employé est le 
+                    <span t-field="o.dateAnciennete"></span>
+
+                </p>
+
+                <p style="font-size:25px;margin-top:40px">
+
+                  <span style="font-weight:bold;border-bottom:1px solid">
+                    Article 4 :
+                  </span>
+                  <span style="font-weight:bold;">
+                    FONCTIONS ET QUALIFICATIONS
+
+                  </span>
+
+                </p>
+                <p style="font-size:25px;margin-top:-10px">
+                    L’employé occupe le poste de <span t-field="o.job_id.name"></span> et est classée en catégorie 
+                  <span t-field="o.convention_id.conv_id.name"/>
+
+                    de l’échelle hiérarchique professionnelle définie par la Convention Collective du                             <span t-field="o.convention_id.name"/>
+                  . Compte tenu de son degré d'autonomie dans l'exercice de ses fonctions et de son niveau
+                    de responsabilité, l’employé a un statut de <span t-field="o.statut"></span>. Compte tenu des nécessités économiques actuelles de l’Employeur, l’employé est affecté au poste indiqué ci-dessus étant entendu que l’Employeur se réserve le droit en fonction de ses solutions et
+                  de ses besoins économiques, de l’affecter à tout autre poste au sein de                   
+                    <span t-field="o.company_id.name"/>,
+                de niveau et de catégorie équivalents. Cette affectation fera au préalable l’objet d’une notification écrite à l’employé.
+
+                </p>
+
+                <p style="font-size:25px;margin-top:40px">
+
+                  <span style="font-weight:bold;border-bottom:1px solid">
+                    Article 5 :
+                  </span>
+                  <span style="font-weight:bold;">
+                    OBLIGATIONS
+
+                  </span>
+
+                </p>
+                <p style="font-size:25px;margin-top:-10px">
+
+                  L’employé consacrera l’exclusivité de son activité professionnelle à                          
+                    <span t-field="o.company_id.name"/>
+ . Il devra respecter le règlement intérieur de l’entreprise, toutes consignes verbales ou écrites ainsi que les notes de services et procédures afférentes à son activité.
+                  D’une manière globale, il devra à tout moment être en mesure de rendre compte de sa mission auprès de son supérieur hiérarchique. il s’oblige à respecter les objectifs qui lui auront été fixés et qu’il aura acceptés.
+
+                </p>
+                  <!--
+                <p style="font-size:25px;margin-top:-10px">
+                  L’Employé bénéficie de permissions exceptionnelles d’absence dans la limite de 15 jours. Toutefois, l’Employé est tenu de demander une autorisation préalable de la direction.
+                </p>
+                <p style="font-size:25px;margin-top:-10px">
+                  En cas de force majeure, l’Employé doit informer son employeur dès la reprise du travail et faire parvenir dans le délai de dix (10) jours après l’évènement, la justification précise de l'absence, tout silence prolongé pouvant constituer une faute
+                  grave. 
+
+                </p>
+                -->
+                <p style="font-size:25px;margin-top:40px">
+
+                  <span style="font-weight:bold;border-bottom:1px solid">
+                    Article 6 :
+                  </span>
+                  <span style="font-weight:bold;">
+                    ABSENCE
+
+                  </span>
+
+                </p>
+                <p style="font-size:25px;margin-top:-10px">
+
+                  Les absences et permissions exceptionnelles sont définies conformément à l’Article 27 de la Convention Nationale Interprofessionnelle. L’employé bénéficie de permissions exceptionnelles d’absence dans la limite de 15 jours. Toutefois, l’employé est
+                  tenu de demander une autorisation préalable de la direction. En cas de force majeure, l’employé doit informer son employeur dès la reprise du travail et faire parvenir dans le délai de dix (10) jours après l’évènement, la justification précise de
+                  l'absence, tout silence prolongé pouvant constituer une faute grave.
+
+                </p>
+
+                <p style="font-size:25px;margin-top:40px">
+
+                  <span style="font-weight:bold;border-bottom:1px solid">
+                    Article 7 :
+                  </span>
+                  <span style="font-weight:bold;">
+                    MALADIE
+
+                  </span>
+
+                </p>
+                <p style="font-size:25px;margin-top:-10px">
+
+                  Pour ne pas nuire à la bonne organisation du travail et pour permettre à l’employeur de prévoir les dispositions nécessaires, toute indisponibilité du fait de maladie ou d’accident, doit être signalée à l’employeur par l’employé dans le délai de 6
+                  jours à compter de l’accident ou de la maladie, étant précisé que les certificats médicaux justificatifs devront être envoyés dans le délai d’une semaine. L’employeur sera immédiatement avisé en cas de prolongation. Si le travailleur malade fait
+                  constater son état par le service médical de l’entreprise dans un délai de 48 heures ; il n’aura pas d’autres formalités à accomplir. Dans la négative, il doit, sauf cas de force majeure, avertir son employeur du motif de son absence dans un délai de
+                  6 jours suivant la date de l'accident ou de la maladie. Cet avis est confirmé par un certificat médical à produire dans le délai d'une semaine. Ces dispositions sont celles prévues par l’Article 86 de la Convention Nationale Interprofessionnelle.
+
+                </p>
+                  
+                  
+                   <p style="font-weight:bold;border-top:1px solid;width:100%;margin-top:190px;"></p>
+
+                <p style="font-size:25px;margin-top:-15px" align="center">
+                  page 2 sur 5
+                </p>
+                  
+                  <p style="page-break-after: always;" ></p>
+                  
+                  
+                  
+                <p style="font-size:25px;margin-top:40px;padding-top:50px;">
+
+                  <span style="font-weight:bold;border-bottom:1px solid">
+                    Article 8 :
+                  </span>
+                  <span style="font-weight:bold;">
+                    LIEU DE TRAVAIL
+
+                  </span>
+
+                </p>
+                <p style="font-size:25px;margin-top:-10px">
+
+                  <span>L’affectation de l’employé est fixée au siège social de
+                    <span t-field="o.company_id.name"/></span>
+                  <span t-field="o.company_id.street"/>
+                  L’employé est engagée pour servir en tous lieux dans la région où
+                  <span t-field="o.company_id.street"/>
+                    <span t-field="o.company_id.name"></span>
+                  <span>aurait besoin de ses services sans qu’il soit nécessaire de l’en informer par une procédure particulière.</span>
+
+                  <span>Il pourra être amené à effectuer des déplacements professionnels au Sénégal ou à l’étranger.</span>
+
+                </p>
+
+                   <br/>
+               
+
+              </div>
+            </div>
+              
+             
+
+            <div class="row">
+              <div class="col-12">
+                <p style="font-size:25px;margin-top:50px">
+
+                  <span style="font-weight:bold;border-bottom:1px solid">
+                    Article 9 :
+                  </span>
+                  <span style="font-weight:bold;">
+                    TEMPS DE TRAVAIL
+
+                  </span>
+
+                </p>
+
+                <p style="font-size:25px;margin-top:30px">
+
+                  Conformément aux dispositions du Code du Travail, la durée de travail est de quarante (40) heures par semaine. Cette durée de travail sera fonction de l’horaire établi par l’employeur.
+
+                </p>
+
+             
+
+                <p style="font-size:25px;margin-top:50px">
+
+                  <span style="font-weight:bold;border-bottom:1px solid">
+                    Article 10 :
+                  </span>
+                  <span style="font-weight:bold;">
+                    REMUNERATION
+
+                  </span>
+
+                </p>
+                <p style="font-size:25px;margin-top:-10px">
+                  En contrepartie du temps de travail effectué tel que mentionné à l’article ci-dessus, l’employé percevra une rémunération mensuelle brute d’un montant total de
+                  <t t-esc="o.wage+o.prime+o.sursalaire"/>
+                    (<t t-esc="o.currency_id.amount_to_text(o.wage+o.prime+o.sursalaire)"/>)
+                    détaillé comme suit :
+
+                </p>
+                <table style="width:60%;border-collapse:collapse" align="center">
+                  <tr>
+                    <td style="width:40%;border:1px solid;padding-left:3px" align="left">
+                      <p style="font-size:25px;">Salaire de base Catégorie <span t-field="o.convention_id.name"/></p>
+                    </td>
+                    <td style="width:20%;border:1px solid;padding-right:3px" align="right">
+                      <p style="font-size:25px;">
+                        <span t-field="o.wage"/>
+
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width:40%;border:1px solid;padding-left:3px" align="left">
+                      <p style="font-size:25px;">Sursalaire</p>
+                    </td>
+                    <td style="width:20%;border:1px solid;padding-right:3px" align="right">
+                      <p style="font-size:25px;"><span t-field="o.sursalaire"/></p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width:40%;border:1px solid;padding-left:3px" align="left">
+                      <p style="font-size:25px;">Prime de transport</p>
+                    </td>
+                    <td style="width:20%;border:1px solid;padding-right:3px" align="right">
+                      <p style="font-size:25px;"><span t-field="o.prime"/></p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width:40%;border:1px solid;padding-left:3px;font-weight:bold" align="left">
+                      <p style="font-size:25px;">TOTAL</p>
+                    </td>
+                    <td style="width:20%;border:1px solid;padding-right:3px;font-weight:bold" align="right">
+                      <p style="font-size:25px;"><t t-esc="o.wage+o.prime+o.sursalaire"/></p>
+                    </td>
+                  </tr>
+
+                </table>
+
+                <p style="font-size:25px;margin-top:30px">
+                  Cette rémunération lui sera payée par chèque ou virement bancaire à l’expiration de chaque période d’un (1) mois, déduction faite des cotisations sociales et charges prévues par les lois et règlements en vigueur .L’employeur peut payer des primes ou
+                  boni à l’employé. Le paiement de ces primes dépendra, entre autres choses, de la performance de l’employé et de la santé financière de la Société. Les objectifs de déclenchement des primes seront fixés par l’employeur. Le montant des primes reste à
+                  la discrétion de l’employeur.
+
+                </p>
+
+                <p style="font-size:25px;margin-top:50px">
+
+                  <span style="font-weight:bold;border-bottom:1px solid">
+                    Article 11 :
+                  </span>
+                  <span style="font-weight:bold;">
+                    CONGES PAYES – INDEMNITE DE CONGES
+                  </span>
+
+                </p>
+                <p style="font-size:25px;margin-top:-10px">
+                  En application des dispositions de la loi 97-17 du 01 décembre 1997 portant code du travail et conformément aux articles L.148 à L.155, l’employé acquiert un droit aux congés payés, à la charge de l’employeur à raison de 2,5 jours calendaires par mois
+                  de service effectif. Le droit pour l’employé de prendre effectivement des congés s’ouvre après une durée de service effectif égale à 12 mois. Le congé doit effectivement être pris dans les douze mois après l’embauche ou le retour du précédent congé. En
+                  cas de nécessité de service, la période de congé sera déterminée d’un commun accord avec l’employé. Toutefois si l’employé n’a pas acquis le droit de jouissance nécessitant une période maximale de service effectif de douze (12) mois, elle
+                  bénéficiera d’une indemnité de congés calculée sur la base des droits acquis, calculée conformément aux dispositions du Code du Travail.
+
+                </p>
+                <p style="font-size:25px;margin-top:50px">
+
+                  <span style="font-weight:bold;border-bottom:1px solid">
+                    Article 12 :
+                  </span>
+                  <span style="font-weight:bold;">
+                    FRAIS PROFESSIONNELS
+
+                  </span>
+
+                </p>
+                <p style="font-size:25px;margin-top:-10px">
+                  Les frais professionnels de l’employé lui seront remboursés sur présentation des justificatifs correspondants dans les limites du barème en vigueur au sein de la société.
+                </p>
+                <p style="font-size:25px;margin-top:50px">
+
+                  <span style="font-weight:bold;border-bottom:1px solid">
+                    Article 13 :
+                  </span>
+                  <span style="font-weight:bold;">
+                    PREVOYANCE RETRAITE SECURITE SOCIALE
+
+                  </span>
+
+                </p>
+                <p style="font-size:25px;margin-top:-10px">
+
+                  Par les soins de l’employeur, l’employé sera affilié aux régimes légaux de retraite, d’allocation familiale et d’accidents de travail. L’employé bénéficiera également de la couverture santé auprès d’une Institution de Prévoyance Maladie (IPM)
+                </p>
+                  
+                <p style="font-weight:bold;border-top:1px solid;width:100%;margin-top:100px;"></p>
+
+                <p style="font-size:25px;margin-top:-15px" align="center">
+                  page 3 sur 5
+                </p>
+                  
+                <p style="page-break-after: always;" ></p>
+              
+                  
+                <p style="font-size:25px;margin-top:50px;padding-top:40px;">
+
+                  <span style="font-weight:bold;border-bottom:1px solid">
+                    Article 14 :
+                  </span>
+                  <span style="font-weight:bold;">
+                    SECRET PROFESSIONNEL ET CONFIDENTIALITE
+                  </span>
+
+                </p>
+                <p style="font-size:25px;margin-top:-10px">
+                    Compte tenu de la nature des activités de <span t-field="o.company_id.name"> </span>, l’employé s’engage au secret professionnel le plus absolu, tant pendant le temps du présent contrat que postérieurement. Toute violation de cette obligation de secret professionnel sera
+                  constitutive de faute lourde et sera susceptible d’occasionner à l’encontre de l’employé des poursuites pénales.Ainsi, toutes les données relatives aux clients et partenaires commerciaux de <span t-field="o.company_id.name"> </span>, ses listes de clients, ses références, ses parties
+                  cocontractantes, ses employés, ses dirigeants, les membres de son conseil d’administration et ses actionnaires, sont les biens exceptionnels, uniques, personnels et d’une grande valeur à la Société (les « Informations Confidentielles »).
+
+                </p>
+                  
+                 
+                
+                <p style="font-size:25px;margin-top:30px">
+                  Les Informations Confidentielles incluent également toute information (dont les secrets industriels et commerciaux, les données techniques et non techniques, les formules, les compilations les algorithmes, les programmes, les appareils, les méthodes,
+                  les techniques les schémas, les procédés, les stratégies commerciales, les données financières et projections financières non-publiées,les plans de développement de produit(s), les clients actuels ou futurs, les projets, les opportunités d’affaires)
+                  dans laquelle <span t-field="o.company_id.name"> </span> : - tire une valeur économique du fait qu’elles ne sont pas connues généralement du public, et qu’elles ne sont connues de personnes pouvant tirer une valeur économique de leur divulgation ou de leur utilisation ; - cherche
+                  à garder secrètes. Pendant la durée du Contrat, et même après sa fin – résultant d’un renvoi, d’une démission ou toute autre circonstance – l’employé ne doit à aucun moment et ni directement ou indirectement fournir les Informations Confidentielles,
+                  que ce soit en partie ou en totalité à aucune personne, firme, société, association ou toute autre entité, ou encore utiliser les Informations Confidentielles pour quelque raison que ce soit autre que dans le cadre des autorisations accordées par
+                  <span t-field="o.company_id.name"> </span>. Excepté dans l’exécution de ses fonctions et obligations, l’employé n’utilisera pas les Informations Confidentielles à son profit ou au profit de toute autre personne, entreprise ou organisation, sans le consentement préalable de
+                  <span t-field="o.company_id.name"> </span>.
+                </p>
+                <p style="font-size:25px;margin-top:50px">
+
+                  <span style="font-weight:bold;border-bottom:1px solid">
+                    Article 15 :
+                  </span>
+                  <span style="font-weight:bold;">
+                    CONDITIONS GENERALES DE COLLABORATION
+
+                  </span>
+
+                </p>
+                <p style="font-size:25px;margin-top:-10px">
+
+                  L’employé sera tenu de respecter les règles disciplinaires en vigueur dans la société. Elle ne saurait ignorer, par ailleurs, ni la portée des règles déontologiques relatives à l’indépendance et au secret professionnel, ni l’intérêt de l’obligation
+                  de discrétion. De la même manière, l’employé devra respecter strictement l’interdiction d’effectuer, en dehors des travaux qui lui seront confiés, aucun travail assimilable, rémunéré ou non, sans autorisation écrite de la part de sa direction. Cette
+                  interdiction ne vise toutefois pas les groupements et associations à but non lucratif dont l’employé serait membre et pour lesquels elle assumerait un travail bénévole. L’employé devra faire connaître à l'entreprise sans délai toute modification
+                  postérieure à son engagement qui pourrait intervenir dans son état civil, sa situation de famille, son adresse.
+                </p>
+
+                <p style="font-size:25px;margin-top:50px">
+
+                  <span style="font-weight:bold;border-bottom:1px solid">
+                    Article 16 :
+                  </span>
+                  <span style="font-weight:bold;">
+                    RESPECT DE CLIENTELE
+
+                  </span>
+
+                </p>
+                <p style="font-size:25px;margin-top:-10px">
+                  Les clients pour lesquels l’employé est appelé à travailler, même à titre occasionnel, sont des clients de la société. Il en est ainsi également pour les missions qui lui seraient confiées à titre personnel et dont les honoraires correspondants
+                  doivent être encaissés par <span t-field="o.company_id.name"> </span>. Ses fonctions lui font un devoir de ne pas détourner ou tenter de détourner les clients de la société à son profit ou au profit d’un tiers.En conséquence, l’employé s’interdit, en cas de départ de <span t-field="o.company_id.name"> </span>
+                  SAS, de conserver toutes pièces, tous documents, toutes correspondances ou tous programmes informatiques, leurs supports et toutes données enregistrées appartenant soit à la société, soit à des clients ou anciens clients.
+                </p>
+
+                <p style="font-size:25px;margin-top:50px">
+
+                  <span style="font-weight:bold;border-bottom:1px solid">
+                    Article 17 :
+                  </span>
+                  <span style="font-weight:bold;">
+                    CLAUSE DE NON-CONCURRENCE
+
+                  </span>
+
+                </p>
+                <p style="font-size:25px;margin-top:-10px">
+
+                  Conformément aux dispositions de l’article L.35 du Code du Travail, l’employé doit toute son activité professionnelle à l’entreprise pendant la durée d’exécution du contrat. Il s’interdit de mener toute activité susceptible de concurrencer
+                  l’entreprise. En cas de rupture du présent contrat du fait de l’employé ou pour faute lourde, l’employé s’interdit d’exercer pendant un délai d’un an, sous quelque forme que ce soit, directement ou indirectement par personne physique ou morale
+                  interposée, toutes activités de nature à concurrencer l’employeur dans un rayon de cinquante (50) kilomètres autour du lieu de travail. L’employeur pourra librement dispenser par écrit, l’employé, de l’exécution de la clause de non-concurrence ou en
+                  réduire la durée.
+                </p>
+                  
+                <p style="font-weight:bold;border-top:1px solid;width:100%;margin-top:10px;"></p>
+
+                <p style="font-size:25px;margin-top:-15px" align="center">
+                  page 4 sur 5
+                </p>
+                  
+                   <p style="page-break-after: always;" ></p>
+                  
+                <p style="font-size:25px;margin-top:50px;padding-top:50px;">
+
+                  <span style="font-weight:bold;border-bottom:1px solid">
+                    Article 18 :
+                  </span>
+                  <span style="font-weight:bold;">
+                    ARRIVEE DU TERME – RUPTURE
+
+                  </span>
+
+                </p>
+                <p style="font-size:25px;margin-top:-10px">
+                  Il ne peut être mis fin avant terme à ce contrat de travail à durée indéterminée qu’en cas de faute lourde ou graves répétées, d’accord parties, constaté par écrit, de force majeure ou par démission notifiée avec avis de réception ou remise en mains propres avec un préavis de 
+                    <span t-if="o.statut == 'cadre'"> trois (3) mois</span>
+                    <span t-if="o.statut == 'noncadre'"> un (1) mois</span>
+                    .
+
+                </p>
+                  
+                 
+                  
+                <p style="font-size:25px;margin-top:40px">
+
+                  <span style="font-weight:bold;border-bottom:1px solid">
+                    Article 19 :
+                  </span>
+                  <span style="font-weight:bold;">
+                    JURIDICTION COMPETENTE
+
+                  </span>
+
+                </p>
+                <p style="font-size:25px;margin-top:-10px">
+                  La loi sénégalaise est applicable. En cas de litige, la juridiction compétente sera le Tribunal du Travail de Dakar.
+                </p>
+                  
+                   
+                  
+                  
+                <p style="font-size:25px;margin-top:30px">
+
+                  <span style="font-weight:bold;border-bottom:1px solid">
+                    Article 20 :
+                  </span>
+                  <span style="font-weight:bold;">
+
+                    AUTRES TERMES ET CONDITIONS
+
+                  </span>
+
+                </p>
+
+                
+                
+
+                <div class="row">
+                  <div class="col-12" style="margin-bottom:-10px">
+
+                    <p style="font-size:25px;margin-top:30px">
+                      Pour tout autre point non spécifié dans le présent accord, les parties se conformeront à la législation, les règles, les conventions et usages en vigueur dans la profession au Sénégal.Le présent contrat prend effet entre les parties à compter du <span t-field="o.date_start"/> sous réserve de l’approbation par l’autorité compétente.
+
+                    </p>
+
+                    <p style="font-size:25px;margin-top:100px;font-weight:bold">
+
+                      <span>Fait à Dakar le</span>
+                      <span t-esc="o.date_start"/>
+                      <!--<span>,</span>-->
+                    </p>
+                    <p style="font-size:25px;margin-top:20px;font-weight:bold">
+
+                      <span t-field="o.company_id.name"/>
+                    </p>
+                    <p style="font-size:25px;margin-top:20px;font-weight:bold;margin-left:60%">
+
+                      L’EMPLOYEE
+                    </p>
+                    <p style="font-size:25px;margin-top:50px;margin-left:60%">
+                      Précédé de la mention « lu et approuvé »
+                    </p>
+                    <p style="font-size:25px;margin-top:270px;font-weight:bold" align="center">
+                      L’INSPECTION DU TRAVAIL
+                    </p>
+
+                    <p style="font-weight:bold;border-top:1px solid;width:100%;margin-top:660px"></p>
+                    <p style="font-size:25px;margin-top:-10px" align="center">
+                      page 5 sur 5
+
+                    </p>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </t>
+      </t>
+
+    </template>
+
+  </data>
+</odoo>
