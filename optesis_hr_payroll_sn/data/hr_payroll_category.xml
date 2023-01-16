@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data noupdate="0">
+
+      <!--Catégories -->
+    <record id="optesis_hr_payroll.BASE" model="hr.salary.rule.category">
+      <field name="name">Salaire de base</field>
+      <field name="code">BASE</field>
+      <field name="parent_id" eval="False"/>
+    </record>
+
+    <record id="optesis_hr_payroll.INDM" model="hr.salary.rule.category">
+      <field name="name">INDEMNITE</field>
+      <field name="code">INDM</field>
+      <field name="parent_id" eval="False"/>
+    </record>
+      
+    <record id="avantage_nature" model="hr.salary.rule.category">
+      <field name="name">Avantages en Nature</field>
+      <field name="code">AVN</field>
+      <field name="parent_id" eval="False"/>
+    </record>
+      
+    <record id="hsup" model="hr.salary.rule.category">
+      <field name="name">Heures supplémentaires</field>
+      <field name="code">HSUP</field>
+      <field name="parent_id" eval="False"/>
+    </record>
+    
+      <record id="non_imposable" model="hr.salary.rule.category">
+      <field name="name">Non imposable</field>
+      <field name="code">NIMP</field>
+      <field name="parent_id" eval="False"/>
+    </record>
+      
+    <record id="optesis_hr_payroll.BRUT" model="hr.salary.rule.category">
+      <field name="name">BRUT</field>
+      <field name="code">BRUT</field>
+      <field name="parent_id" eval="False"/>
+    </record>
+      
+    <record id="imposable" model="hr.salary.rule.category">
+      <field name="name">Imposable</field>
+      <field name="code">IMPO</field>
+      <field name="parent_id" eval="False"/>
+    </record>
+    
+    <record id="cumul_imposable" model="hr.salary.rule.category">
+      <field name="name">Cumul Imposable</field>
+      <field name="code">C_IMP</field>
+      <field name="parent_id" eval="False"/>
+    </record>
+      
+       <record id="cumul_tranche_impot" model="hr.salary.rule.category">
+      <field name="name">Cumul Tranche Impot</field>
+      <field name="code">CTIP</field>
+      <field name="parent_id" eval="False"/>
+    </record>
+      
+    <record id="contribution_societe" model="hr.salary.rule.category">
+      <field name="name">Contribution de la société</field>
+      <field name="code">CPAT</field>
+      <field name="parent_id" eval="False"/>
+    </record>
+    
+    <record id="provision" model="hr.salary.rule.category">
+      <field name="name">Provision</field>
+      <field name="code">PROV</field>
+      <field name="parent_id" eval="False"/>
+    </record>
+      
+    <record id="SALC" model="hr.salary.rule.category">
+      <field name="name">Charges Salariales</field>
+      <field name="code">CSAL</field>
+      <field name="parent_id" eval="False"/>
+    </record>
+    
+    <record id="impot_revenu" model="hr.salary.rule.category">
+      <field name="name">Impot sur le revenu</field>
+      <field name="code">IREV</field>
+      <field name="parent_id" eval="False"/>
+    </record>
+    
+    <record id="trimf" model="hr.salary.rule.category">
+      <field name="name">TRIMF</field>
+      <field name="code">TRMF</field>
+      <field name="parent_id" eval="False"/>
+    </record>
+    
+    <record id="retenue" model="hr.salary.rule.category">
+      <field name="name">Retenues</field>
+      <field name="code">RETE</field>
+      <field name="parent_id" eval="False"/>
+    </record>
+      
+   
+
+
+    <record id="optesis_hr_payroll.DED" model="hr.salary.rule.category">
+      <field name="name">Total Retenues</field>
+      <field name="code">TDED</field>
+      <field name="parent_id" eval="False"/>
+    </record>
+      
+      <record id="DEDIRPP" model="hr.salary.rule.category">
+      <field name="name">Déduction d'impôt</field>
+      <field name="code">DIMP</field>
+      <field name="parent_id" eval="False"/>
+    </record>
+
+    <record id="DEDIRPPS" model="hr.salary.rule.category">
+      <field name="name">Total Déduction d'impôt</field>
+      <field name="code">TDIMP</field>
+      <field name="parent_id" eval="False"/>
+    </record>
+      
+      
+      
+    <record id="optesis_hr_payroll.NET" model="hr.salary.rule.category">
+      <field name="name">Net</field>
+      <field name="code">NET</field>
+      <field name="parent_id" eval="False"/>
+    </record>
+      
+    <record id="tranche_impot_sur_revenu" model="hr.salary.rule.category">
+      <field name="name">Tranche impot sur revenu</field>
+      <field name="code">TREV</field>
+      <field name="parent_id" eval="False"/>
+    </record>
+      
+   
+   
+    <record id="base_fiscal" model="hr.salary.rule.category">
+      <field name="name">Base Fiscal</field>
+      <field name="code">BFISC</field>
+      <field name="parent_id" eval="False"/>
+    </record>
+      
+ </data>
+</odoo>      

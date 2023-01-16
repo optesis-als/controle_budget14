@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+      <menuitem id="menu_hr_payroll_analyse"
+              name="Rapports" parent="menu_hr_payroll_root"
+              sequence="99"/>
+
+      <record id="hr_payslip_net_salary_to_payslip" model="ir.ui.view">
+            <field name="name">hr.payslip.net_salary.to.payslip.view</field>
+            <field name="model">hr.payslip</field>
+            <field name="priority">20</field>
+            <field name="inherit_id" ref="optesis_hr_payroll.view_hr_payslip_form"/>
+            <field name="arch" type="xml">
+            <data>
+                
+            <xpath expr="//div[@class='oe_title']" position="before"> 
+                <div attrs="{'invisible': [('number_draft','=',False)]}">
+               <!-- <label for="number_draft" string="Draft"/>-->
+                <field name="number_draft" readonly="1" style=" font-weight: bold;" />
+                </div>
+                
+                <div attrs="{'invisible': [('state','=','draft')]}">
+                   <!--<label for="sequence_number_next_prefix" string="Invoice Number:"/><br/>-->
+                   <field name="number" readonly="1" style=" font-weight: bold;"/>
+                </div>
+            </xpath>
+                
+             
+                
+                 <xpath expr="//group[1]" position="replace"> 
+                      <group col="4">
+                            <label for="date_from" string="Period"/>
+                            <div>
+                                <field name="date_from" class="oe_inline"/>
+                                -
+                                <field name="date_to" class="oe_inline"/>
+                            </div>
+                            <field name="contract_id"
+                                   domain="[('employee_id','=',employee_id),('date_start','&lt;=',date_to),'|',('date_end','&gt;=',date_from),('date_end','=',False)]"
+                                   context="{'default_employee_id': employee_id}"/>
+                           <!-- <field name="number"/>-->
+                            <field name="struct_id" attrs="{'required':[('contract_id','!=',False)]}"/>
+                            <field name="company_id"></field>
+                            <field name="name"/>
+                          
+                        </group>
+                </xpath>
+                
+            <field name="state" position="replace" > 
+                <field name="state" widget="statusbar"/>
+            </field>
+                
+            <button name="refund_sheet" position="attributes" > 
+                <attribute name="invisible">1</attribute>
+            </button>
+                
+            <button name="action_send_email" position="attributes" > 
+                <attribute name="invisible">1</attribute>
+            </button>
+               
+               
+                
+                
+            
+              
+                
+            <button name="action_payslip_done" position="replace" > 
+               
+                 <button  name="action_payslip_done" type="object"  string="CLOTURER" states="validate" class="oe_highlight" groups="optesis_hr_payroll.group_hr_payroll_directeur_rh" confirm="Attention la paie clôturée ne peut être réouverte"/>
+            </button>
+                
+              
+          <button name="action_payslip_cancel" position="replace" > 
+               
+               <button string="ANNULER LE BULLETIN" name="action_payslip_cancel" type="object" states="confirm" groups="optesis_hr_payroll.group_hr_payroll_manager" attrs="{'invisible': [('state','!=','confirm')]}"/>
+                <button string="ANNULER LE BULLETIN" name="action_payslip_cancel" type="object" states="validate" groups="optesis_hr_payroll.group_hr_payroll_directeur_rh" attrs="{'invisible': [('state','!=','validate')]}"/>
+                      
+        </button>
+
+        <button name="action_payslip_draft" position="replace" > 
+              <!-- Les utilisateurs du groupe Responsable comptable peuvent saugedarder et valider et cloturé -->
+                    
+            
+                     <button string="REMETTRE EN BROUILLON" name="action_payslip_draft" type="object" states="confirm,cancel" groups="optesis_hr_payroll.group_hr_payroll_manager" attrs="{'invisible': [('state','!=','confirm')]}"/>
+                         
+                         
+                               
+                     <button string="REMETTRE EN BROUILLON" name="action_payslip_draft" type="object" states="validate" groups="optesis_hr_payroll.group_hr_payroll_directeur_rh" attrs="{'invisible': [('state','!=','validate')]}"/>
+                      
+            </button>
+                
+                
+                
+                
+                
+                  
+                <xpath expr="//header" position="inside">
+                            
+                
+                    
+                     <button string="CONFIRMER" name="action_payslip_confirm" type="object" states="draft" class="oe_highlight" groups="optesis_hr_payroll.group_hr_payroll_user"/>
+                    
+                       
+                     <button string="VALIDER" name="action_payslip_validate" type="object" states="confirm" class="oe_highlight" groups="optesis_hr_payroll.group_hr_payroll_manager"/>
+                    
+                    
+                    
+                </xpath>
+                
+                <xpath expr="//sheet[1]" position="after"> 
+                 <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </xpath>
+                 
+                <xpath expr="//notebook[1]" position="replace">
+                 <notebook>
+                      <page string="Calcul de salaire">
+
+                                <field name="calcul_salary_rule" colspan="4" nolabel="1">
+                                  
+                                    <tree string="Salary Structure" editable="bottom" decoration-info="total == 0">
+                                        <field name="name"/>
+                                        <field name="code"/>
+                                        <field name="category_id"/>
+                                        <field name="sequence" invisible="1"/>
+                                        <field name="quantity"/>
+                                        <field name="rate"/>
+                                        <field name="salary_rule_id"/>
+                                        <field name="amount"/>
+                                        <field name="total"/>
+                                    </tree>
+                                    <form string="Payslip Line">
+                                        <group col="4">
+                                            <field name="name"/>
+                                            <field name="code"/>
+                                            <field name="category_id"/>
+                                            <field name="sequence"/>
+                                            <field name="quantity"/>
+                                            <field name="rate"/>
+                                            <field name="amount"/>
+                                            <field name="total"/>
+                                            <field name="salary_rule_id"/>
+                                        </group>
+                                    </form>
+                                </field>
+                                
+                            </page>
+                      <page string="Details des regles salariales">
+                                <field name="line_ids" colspan="4" nolabel="1" readonly="1">
+                                    <tree string="Salary Structure" editable="bottom" decoration-info="total == 0">
+                                        <field name="name"/>
+                                        <field name="code"/>
+                                        <field name="category_id"/>
+                                        <field name="sequence" invisible="1"/>
+                                        <field name="quantity"/>
+                                        <field name="rate"/>
+                                        <field name="salary_rule_id"/>
+                                        <field name="amount"/>
+                                        <field name="total"/>
+                                    </tree>
+                                    <form string="Payslip Line">
+                                        <group col="4">
+                                            <field name="name"/>
+                                            <field name="code"/>
+                                            <field name="category_id"/>
+                                            <field name="sequence"/>
+                                            <field name="quantity"/>
+                                            <field name="rate"/>
+                                            <field name="amount"/>
+                                            <field name="total"/>
+                                            <field name="salary_rule_id"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                            <page string="Jours travaillés et entrées">
+                                <separator string="Jours travaillés"/>
+                                <field name="worked_days_line_ids">
+                                    <tree string="Worked Days" editable="bottom">
+                                        <field name="name"/>
+                                        <field name="code"/>
+                                        <field name="number_of_days" sum="Total Working Days"/>
+                                        <field name="number_of_hours"/>
+                                        <field name="contract_id"/>
+                                        <field name="sequence" invisible="True"/>
+                                    </tree>
+                                    <form string="Worked Day">
+                                        <group col="4">
+                                            <field name="name"/>
+                                            <field name="code"/>
+                                            <field name="sequence"/>
+                                            <field name="number_of_days"/>
+                                            <field name="number_of_hours"/>
+                                            <field name="contract_id"/>
+                                        </group>
+                                    </form>
+                                </field>
+                                <separator string="Autres entrées"/>
+                                <field name="input_line_ids" colspan="4" nolabel="1">
+                                    <tree string="Input Data" editable="bottom">
+                                        <field name="name"/>
+                                        <field name="code"/>
+                                        <field name="amount"/>
+                                        <field name="contract_id"/>
+                                        <field name="sequence" invisible="True"/>
+                                    </tree>
+                                    <form string="Payslip Line">
+                                        <group col="4">
+                                            <field name="name"/>
+                                            <field name="code"/>
+                                            <field name="sequence"/>
+                                            <field name="amount"/>
+                                            <field name="contract_id"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                          <page string="Informations comptables">
+                                <group>
+                                    <group string="Divers">
+                                        <field name="company_id" groups="base.group_multi_company"/>
+                                        <field name="payslip_run_id" domain="[('state','=','draft')]"/>
+                                    </group>
+                                    <group name="accounting" string="Comptabilité">
+                                        <field name="paid" readonly="1"/>
+                                    </group>
+                                </group>
+                                <div colspan="4">
+                                    <field name="note" placeholder="Add an internal note..."/>
+                                </div>
+                            </page>
+                           
+                             <!--
+                            <page string="Details By Salary Rule Category">
+                                <field name="details_by_salary_rule_category" context="{'group_by':'category_id'}"
+                                       domain="[('appears_on_payslip', '=', True)]">
+                                    <tree string="Payslip Lines" decoration-info="total == 0">
+                                        <field name="category_id"/>
+                                        <field name="name"/>
+                                        <field name="code"/>
+                                        <field name="total"/>
+                                    </tree>
+                                </field>
+                            </page>
+                             
+                            -->
+                           
+                        </notebook>
+            </xpath>
+                     
+                            
+                
+            </data>
+            </field>
+        </record>
+
+    </data>
+</odoo>

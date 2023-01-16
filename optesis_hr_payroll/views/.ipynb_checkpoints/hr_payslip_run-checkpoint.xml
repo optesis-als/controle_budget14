@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <data>
+            
+            
+            
+            <record id="hr_payslip_run_form_inherit_batch_pay" model="ir.ui.view">
+        <field name="name">hr.payslip.run.form.inherit.batch.pay</field>
+        <field name="model">hr.payslip.run</field>
+        <field name="inherit_id" ref="optesis_hr_payroll.hr_payslip_run_form"/>
+        <field name="arch" type="xml">
+            <data>
+              
+                
+                 <xpath expr="//label[@class='oe_edit_only']" position="before"> 
+                <div attrs="{'invisible': [('number_draft','=',False)]}">
+               <!-- <label for="number_draft" string="Draft"/>-->
+                <field name="number_draft" readonly="1" style=" font-weight: bold;" />
+                </div>
+                
+                <div  attrs="{'invisible': [('number_draft','!=',False)]}">
+                   <!--<label for="sequence_number_next_prefix" string="Invoice Number:"/><br/>-->
+                   <field name="sequence_number_next_prefix" class="oe_inline" style=" font-weight: bold;"/>
+                </div>
+            </xpath>
+                
+                
+                 <button name="draft_payslip_run" position="attributes" > 
+                <attribute name="invisible">1</attribute>
+            </button>
+               
+                 <button name="close_payslip_run" position="attributes" > 
+                <attribute name="invisible">1</attribute>
+            </button>
+                
+                 <button name="done_payslip_run" position="attributes" > 
+                <attribute name="invisible">1</attribute>
+            </button>
+               
+                
+                <xpath expr="//sheet[1]" position="after"> 
+                 <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </xpath>
+             
+            
+                <field name="credit_note" position="replace"> 
+                
+                <field name="company_id"></field>
+            </field>
+                 
+                 <!-- Les utilisateurs du groupe Responsable Paie peuvent saugedarder et valider-->
+               
+                     <xpath expr="//header" position="inside">
+                         <!-- Les utilisateurs du groupe Responsable Paie peuvent remettre et annuler a l'etat confirmé-->
+                   
+
+                     <button string="REMETTRE EN BROUILLON" name="draft_payslip_run" type="object" states="confirm,cancel" groups="optesis_hr_payroll.group_hr_payroll_manager" attrs="{'invisible': [('state','!=','confirm')]}"/>
+
+                         
+                         
+                       <!-- Les utilisateurs du groupe DH peuvent remettre et annuler a l'etat validé-->                      <button string="ANNULER LE LOT DE BULLETIN" name="action_payslip_cancel" type="object" states="confirm" groups="optesis_hr_payroll.group_hr_payroll_manager" attrs="{'invisible': [('state','!=','confirm')]}"/>
+                         
+                     <button string="ANNULER LE LOT DEBULLETIN" name="action_payslip_cancel" type="object" states="validate" groups="optesis_hr_payroll.group_hr_payroll_directeur_rh" attrs="{'invisible': [('state','!=','validate')]}"/>
+                         
+
+                     <button string="REMETTRE EN BROUILLON" name="draft_payslip_run" type="object" states="validate," groups="optesis_hr_payroll.group_hr_payroll_directeur_rh" attrs="{'invisible': [('state','!=','validate')]}"/>
+
+                       
+                         
+                         <button string="CONFIRMER" name="action_payslip_confirm" type="object" states="draft"
+                                class="oe_highlight" groups="optesis_hr_payroll.group_hr_payroll_user"/>
+                    
+                       
+                     <button string="VALIDER" name="validate_payslip" type="object" states="confirm"
+                                class="oe_highlight" groups="optesis_hr_payroll.group_hr_payroll_manager"/>
+                         
+                         
+                         
+                         
+                         
+                    </xpath>
+                
+                  <!-- Les utilisateurs du groupe Directeur RH peuvent saugedarder et valider et cloturé -->
+                  <xpath expr="//header" position="inside">
+                        <button name="cloture_payslip" type="object" string="CLOTURER" states="validate" class="oe_highlight" groups="optesis_hr_payroll.group_hr_payroll_directeur_rh" confirm="Attention la paie clôturée ne peut être réouverte"/>
+                    </xpath>
+               
+            </data>
+            </field>
+        </record>
+            
+
+
+        </data>
+</odoo>            

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+   
+    
+    
+        <act_window id="hr_payslip_reporting"
+            name="Analyse"
+            res_model="hr.payslip.line"
+            view_mode="pivot,graph" />
+    
+
+          <menuitem
+          id="reporting_menu_action"
+          action="hr_payslip_reporting"
+          parent="menu_hr_payroll_analyse"
+          sequence="100"/>
+
+        
+
+</odoo>

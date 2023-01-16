@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+      <!-- Pour DMT -->
+        <report
+            id="contrat_dmt_report_header"
+            model="hr.contract"
+            string="DMT"
+            report_type="qweb-pdf"
+            name="optesis_hr_contract_sn.contrat_dmt"
+            file="optesis_hr_contract_sn.contrat_dmt_internal_report" 
+            paperformat="optesis_hr_contract_sn.paperformat_sirh"
+            />
+        <!-- Pour CDI -->
+         <report id="contrat_cdi_report_header"
+                   model="hr.contract" 
+                   string="CDI" 
+                   report_type="qweb-pdf" 
+                   name="optesis_hr_contract_sn.contrat_cdi"
+                   file="optesis_hr_contract_sn.contrat_cdi"
+                  paperformat="optesis_hr_contract_sn.paperformat_contrat_cdd"
+                   />
+      <!-- Pour CDD -->
+            <report id="contrat_cdd_report_header"
+                   model="hr.contract" 
+                   string="CDD" 
+                   report_type="qweb-pdf" 
+                   name="optesis_hr_contract_sn.contrat_cdd"
+                   file="optesis_hr_contract_sn.contrat_cdd"
+                   paperformat="optesis_hr_contract_sn.paperformat_contrat_cdd"
+                    />
+     
+    </data>
+</odoo>

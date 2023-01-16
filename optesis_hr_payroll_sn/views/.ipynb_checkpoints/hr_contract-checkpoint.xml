@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <data> 
+       
+       <!--
+      <record id="hr_contract_form_inherit_sn" model="ir.ui.view">
+            <field name="name">hr.contract.form.inherit.sn</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="optesis_hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+               
+            <field name="employee_id" position="after">
+              <field name="motif"/>
+            </field>
+
+          </field>
+        </record>
+        
+       -->
+       
+       
+         <record id="hr_payslip_sn" model="ir.ui.view">
+            <field name="name">hr.payslip.net_salary.to.payslip.view</field>
+            <field name="model">hr.payslip</field>
+            <field name="priority">20</field>
+            <field name="inherit_id" ref="optesis_hr_payroll.view_hr_payslip_form"/>
+            <field name="arch" type="xml">
+            
+                
+            
+                
+            <field name="company_id" position="after" > 
+                <field name="ir_mois_precedent" invisible="1"/>
+                <field name="date_part_ir" />
+            </field>
+                
+                
+           </field>
+        </record>
+
+      
+             
+  </data>
+</odoo>

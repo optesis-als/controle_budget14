@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <data>
+            
+            
+            
+            <record id="hr_payslip_run_form_inherit_batch_pay" model="ir.ui.view">
+        <field name="name">hr.payslip.run.form.inherit.batch.pay</field>
+        <field name="model">hr.payslip.run</field>
+        <field name="inherit_id" ref="optesis_hr_payroll.hr_payslip_run_form"/>
+        <field name="arch" type="xml">
+            <data>
+             
+            
+            
+                
+                 
+                
+                <xpath expr="//header" position="inside">
+                            <!-- Les utilisateurs du groupe Responsable comptable peuvent saugedarder et valider et cloturé -->
+                        <button name="pay_payslip" type="object" string="COMPTABILISER" states="done" class="oe_highlight" groups="optesis_hr_payroll.group_hr_payroll_res_comptable"/>
+                </xpath>
+            </data>
+            </field>
+        </record>
+            
+
+
+        </data>
+</odoo>            

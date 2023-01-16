@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+       
+    
+    
+        <record model="ir.actions.act_window" id="action_element_variable">
+            <field name="name">Eléments variables</field>
+            <field name="res_model">hr.employee.bonus</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+   
+    
+             <menuitem
+        id="menu_element_variable"
+        action="action_element_variable"
+        parent="optesis_hr_payroll.menu_hr_payroll_configuration"
+        sequence="51"/>
+       
+    
+   
+
+        <record id="hr_contract_bonus_form_inherit" model="ir.ui.view">
+            <field name="name">optesis_hr_contract.view.bonus.form.inherit</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="optesis_hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+               <xpath expr="//page[@name='information']" position="after">
+                <page name="bonus" string="Elements variables">
+                    <field name="bonus" context="{'default_contract_id':id,'default_employee_id':employee_id}"/>
+                    <group class="oe_subtotal_footer oe_right" colspan="2" name="bonus_total">
+                        <field name="total_bonus" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                    </group>
+                </page>
+                
+             
+            </xpath>
+
+           
+
+          </field>
+        </record>
+
+        <record id="employee_bonus__details_form" model="ir.ui.view">
+            <field name="name">Employee Bonus</field>
+            <field name="model">hr.employee.bonus</field>
+            <field name="arch" type="xml">
+                <form string="Employee bonus">
+
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="employee_id"/>
+                                <field name="salary_rule_id" />
+                                <label for="date_from" string="Policy Period"/>
+                          			<div>
+                          				<field name="date_from" class="oe_inline" on_change="1" />
+                          				  -
+                          				<field name="date_to" class="oe_inline" on_change="1" />
+                          			</div>
+                            </group>
+                            <group>
+                                <field name="amount"/>
+                                <field name="company_id"/>
+                                <field name="contract_id"/>
+                            </group>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    
+        <record id="employee_bonus__details_tree" model="ir.ui.view">
+            <field name="name">Employee Bonus</field>
+            <field name="model">hr.employee.bonus</field>
+            <field name="arch" type="xml">
+                <tree string="Employee Bonus">
+                     <field name="salary_rule_id"/>
+                    <field name="date_from" />
+				            <field name="date_to"/>
+                    <field name="amount"/>
+                    <field name="company_id"/>
+                    <field name="contract_id"/>
+                </tree>
+            </field>
+        </record>
+    
+        <record id="view_hr_employee_bonus_filter" model="ir.ui.view">
+            <field name="name">hr.employee.bonus.filter</field>
+            <field name="model">hr.employee.bonus</field>
+            <field name="arch" type="xml">
+                <search string="Element Variable Recherche">
+                    <field name="employee_id" string="Employé"/>
+                    <field name="salary_rule_id" string="Règle salariale"/>
+                    <group col="8" colspan="4" expand="0" string="Group By">
+                        <filter string="Employé" name="employee_id" context="{'group_by':'employee_id'}"/>
+                        <filter string="Règle salariale" name="salary_rule_id" context="{'group_by':'salary_rule_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+    
+  
+    
+   
+</odoo>
